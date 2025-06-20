@@ -37,7 +37,7 @@ MSARM.plot = function(res_MSARM.predict,conf = FALSE, start = c(1,1), freq = 1){
 
   if(conf == TRUE){
     fcast_boot = res_MSARM.predict$fcast_boot
-    plot(ts(Y_T, start = start, freq = freq),lty = 1,xlim = c((time(total_series)[(T-30-n.ahead),T])))
+    plot(ts(Y_T, start = start, freq = freq),lty = 1,xlim = c((time(total_series)[c((T-30-n.ahead),T)])))
     time_new_poly = time(total_series)[(T-n.ahead+1):T]
     xx = c(time_new_poly,rev(time_new_poly))
     for(i in 1:((dim(fcast_boot)[2]-1)/2)){
