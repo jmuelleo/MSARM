@@ -8,14 +8,14 @@
 #' @export
 #'
 #' @examples MSARM.plot(res_MSARM.predict,conf = TRUE)
-MSARM.plot = function(res_MSARM.predict,conf = FALSE){
+MSARM.plot = function(res_MSARM.predict,conf = FALSE, start = c(1,1), freq = 1){
 
   Y_T = res_MSARM.predict$Y_T
   fcast = res_MSARM.predict$fcast
   n.ahead = res_MSARM.predict$n.ahead
   l = length(Y_T)
 
-  total_series = ts(c(Y_T,fcast))
+  total_series = ts(c(Y_T,fcast), start = start, frequency = freq)
   T = length(total_series)
   time_new = time(total_series)[(T-n.ahead):T]
   plot(ts(Y_T),lty = 1, xlim = c(range(time(total_series))))
