@@ -15,10 +15,10 @@ MSARM.plot = function(res_MSARM.predict,conf = FALSE, start = c(1,1), freq = 1){
   n.ahead = res_MSARM.predict$n.ahead
   l = length(Y_T)
 
-  total_series = ts(c(Y_T,fcast), start = start, frequency = freq)
+  total_series = ts(c(Y_T,fcast), start = c(start), frequency = freq)
   T = length(total_series)
   time_new = time(total_series)[(T-n.ahead):T]
-  plot(ts(Y_T),lty = 1, xlim = c(range(time(total_series))))
+  plot(ts(Y_T, start = start, freq = freq),lty = 1, xlim = c(range(time(total_series))))
   time_new_poly = time(total_series)[(T-n.ahead+1):T]
   xx = c(time_new_poly,rev(time_new_poly))
 
