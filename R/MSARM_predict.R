@@ -13,6 +13,7 @@
 #' @examples MSARM.predict(res_MSARM.fit, n.ahead, boot = FALSE, levels = c(0.95,0.9,0.8,0.7,0.6), L = 10000)
 MSARM.predict = function(res_MSARM.fit, n.ahead = 1, boot = FALSE, levels = c(0.95,0.9,0.8,0.7,0.6), L = 10000){
 
+  N = dim(res_MSARM.fit$P)[1]
   zeta_t_T_1 = res_MSARM.fit$zeta_t_T
   n = length(zeta_t_T_1[1,])
   zeta_T_T_1 = zeta_t_T_1[,n]
