@@ -11,8 +11,9 @@
 #'
 #' @examples zeta_Yt_function(alpha,P,Y_T,N,K)
 zeta_Yt_function = function(alpha,P,Y_T,N,K){
+  T = length(Y_T)
   zeta_1_0 = zeta_1_0_function(Y_T,N,K)
-  eta = eta_function(alpha,Y_T,N,K)
+  eta = eta_function(alpha = alpha ,Y_T = Y_T,N = N,K = K)
 
   zeta_t_t = matrix(5,ncol = T,nrow = N)
   zeta_t1_t = matrix(5,ncol = T,nrow = N)

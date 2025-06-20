@@ -14,7 +14,7 @@
 Example4_Beta_F_function = function(Y_T,alpha,P,Switcher = Switcher,N,K){
   if(sum(!(Switcher[-(K+2)])) > 0){
     zeta_YT = zeta_YT_function(alpha,P,Y_T,N,K)
-
+    T = length(Y_T)
     X = matrix(0,ncol = K+1,nrow = T-K-K)
 
     Y = Y_T[(K+K+1):T]

@@ -10,6 +10,7 @@
 #'
 #' @examples eta_function(alpha,Y_T,N,K)
 eta_function = function(alpha,Y_T,N,K){
+  T = length(Y_T)
   eta = matrix(5,ncol = T,nrow = N)
   for(t in (K+1):T){ #Vorstichprobe, daher + K
     for(h in 1:N){

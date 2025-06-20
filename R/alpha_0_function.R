@@ -9,6 +9,7 @@
 #'
 #' @examples alpha_0_function(Y_T,N,K)
 alpha_0_function = function(Y_T,N,K){
+  T = length(Y_T)
   alpha = matrix(0,nrow = N,ncol = K+2)
   for(n in 1:N){
     alpha[n,1] = runif(1,min(Y_T),max(Y_T))

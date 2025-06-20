@@ -9,6 +9,7 @@
 #'
 #' @examples P_0_function(Y_T,N,K)
 P_0_function = function(Y_T,N,K){
+  T = length(Y_T)
   P = matrix(0,ncol = N,nrow =N)
   for(i in 1:N){
     p_col = runif(N,0.1,0.25)

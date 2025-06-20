@@ -11,6 +11,7 @@
 #'
 #' @examples Log_Likelihood_function(alpha,P,Y_T,N,K)
 Log_Likelihood_function = function(alpha,P,Y_T,N,K){
+  T = length(Y_T)
   zeta_list = zeta_Yt_function(alpha,P,Y_T,N,K)
   zeta_t_t = zeta_list[[1]]
   zeta_t1_t = zeta_list[[2]]

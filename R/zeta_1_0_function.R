@@ -9,6 +9,7 @@
 #'
 #' @examples zeta_1_0_function(Y_T,N,K)
 zeta_1_0_function = function(Y_T,N,K){
+  T = length(Y_T)
   zeta = matrix(0,ncol = 1,nrow = N)
 
   p_col = runif(N,0,1)

@@ -12,7 +12,7 @@
 #'
 #' @examples Example5_alpha_next_function_lastbeta(Y_T,alpha,P,Switcher,N,K)
 Example5_alpha_next_function_lastbeta = function(Y_T,alpha,P,Switcher,N,K){
-
+  T = length(Y_T)
   zeta_YT = zeta_YT_function(alpha,P,Y_T,N,K)
   p = zeta_YT[,(K+K+1+m):T]
 

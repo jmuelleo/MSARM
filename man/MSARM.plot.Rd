@@ -4,7 +4,7 @@
 \alias{MSARM.plot}
 \title{MSARM.plot()}
 \usage{
-MSARM.plot(erg_MSARM.predict, conf = TRUE)
+MSARM.plot(erg_MSARM.predict, conf = FALSE)
 }
 \arguments{
 \item{erg_MSARM.predict}{output from MSARM.predict}
