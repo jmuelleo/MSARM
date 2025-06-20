@@ -73,8 +73,8 @@ if(all.plot == TRUE){
 }
     years = floor(time(zetaout_ts))
 
-if(all.plot == TRUE){
     zetaout_ts_M = ts(t(zetaout))
+if(all.plot == TRUE){
     plot(zetaout_ts_M,plot.type = "single", col = c(1:N), lwd = 2)
     plot(zetaout_ts_M, col = c(1:N), lwd = 2)
 }
