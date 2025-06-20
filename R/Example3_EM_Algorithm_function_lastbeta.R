@@ -79,8 +79,6 @@ Example3_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max
     plot(zetaout_ts_M, col = c(1:N), lwd = 2)
 
     Predicted_Regime = apply(zetaout_ts_M,1,function(row){which(row == max(row))})
-    True_Regime = Regimes[-(1:K)] #Vorstichproben rausnehmen
-    misclassification_rate = mean(Predicted_Regime != True_Regime)
 
     Yhat_insample = rep(0,T-K)
     for(t in 1:(T-K)){
