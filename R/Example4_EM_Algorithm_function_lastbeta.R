@@ -53,7 +53,6 @@ Example4_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max
 
 
 
-
     zetaout = zeta_YT_function(alpha_Sammler[[max+1]],P_Sammler[[max+1]],Y_T,N,K)[,-(1:(K))]
     zetaout_ts = ts(zetaout[1,]) #1 oder 2 wählen je nachdem, wie das Modell die Regime zuordnet
 if(all.plot == TRUE){
