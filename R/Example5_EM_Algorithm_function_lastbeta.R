@@ -14,7 +14,7 @@
 #' @export
 #'
 #' @examples Example5_EM_Algorithm_function_lastbeta(Y_T,K,N,m,threshold = 0.5,max = 500,R = 15, Crit = "LV",m)
-Example5_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max = 500,R = 15, Crit = "LV", all.plot = FALSE){
+Example5_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max = 500,R = 15, Crit = "LV", all.plot = FALSE, Switcher){
   Output_list = as.list(1:R)
   T = length(Y_T)
   LV_list = as.list(1:R)

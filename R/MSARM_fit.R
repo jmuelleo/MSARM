@@ -32,7 +32,8 @@ MSARM.fit = function(Y_T,K,N,Switcher,m = 1,threshold_value = 0.5, max_value = 2
                                             threshold = threshold_value,
                                             max = max_value,
                                             R = R_value,
-                                            Crit = Crit_value)
+                                            Crit = Crit_value,
+                                            Switcher = Switcher)
   }else{
     if(sum(Switcher == c(FALSE,rep(TRUE,K),FALSE))== K+2){
       Example4_EM_Algorithm_function_lastbeta(Y_T = Y_T,
@@ -42,7 +43,8 @@ MSARM.fit = function(Y_T,K,N,Switcher,m = 1,threshold_value = 0.5, max_value = 2
                                               threshold = threshold_value,
                                               max = max_value,
                                               R = R_value,
-                                              Crit = Crit_value)
+                                              Crit = Crit_value,
+                                              Switcher = Switcher)
     }else{
       if(sum(Switcher == c(TRUE,rep(FALSE,K),FALSE)) == K+2){
         Example4_EM_Algorithm_function_lastbeta(Y_T = Y_T,
@@ -52,7 +54,8 @@ MSARM.fit = function(Y_T,K,N,Switcher,m = 1,threshold_value = 0.5, max_value = 2
                                                 threshold = threshold_value,
                                                 max = max_value,
                                                 R = R_value,
-                                                Crit = Crit_value)
+                                                Crit = Crit_value,
+                                                Switcher = Switcher)
       }else{
         if(sum(Switcher == c(rep(TRUE,K+2))) == K+2){
           Example3_EM_Algorithm_function_lastbeta(Y_T = Y_T,
@@ -62,7 +65,8 @@ MSARM.fit = function(Y_T,K,N,Switcher,m = 1,threshold_value = 0.5, max_value = 2
                                                   threshold = threshold_value,
                                                   max = max_value,
                                                   R = R_value,
-                                                  Crit = Crit_value)
+                                                  Crit = Crit_value,
+                                                  Switcher = Switcher)
         }else{
           if(Switcher[K+2] == FALSE){
             Example4_EM_Algorithm_function_lastbeta(Y_T = Y_T,
@@ -72,7 +76,8 @@ MSARM.fit = function(Y_T,K,N,Switcher,m = 1,threshold_value = 0.5, max_value = 2
                                                     threshold = threshold_value,
                                                     max = max_value,
                                                     R = R_value,
-                                                    Crit = Crit_value)
+                                                    Crit = Crit_value,
+                                                    Switcher = Switcher)
           }else{
             Example5_EM_Algorithm_function_lastbeta(Y_T = Y_T,
                                                     K = K,
@@ -81,7 +86,8 @@ MSARM.fit = function(Y_T,K,N,Switcher,m = 1,threshold_value = 0.5, max_value = 2
                                                     threshold = threshold_value,
                                                     max = max_value,
                                                     R = R_value,
-                                                    Crit = Crit_value)
+                                                    Crit = Crit_value,
+                                                    Switcher = Switcher)
           }
         }
       }
