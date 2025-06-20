@@ -13,7 +13,7 @@
 #' @export
 #'
 #' @examples Example3_EM_Algorithm_function_lastbeta(Y_T,K,N,m,threshold = 0.5,max = 500,R = 15, Crit = "LV")
-Example3_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max = 500,R = 15, Crit = "LV"){
+Example3_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max = 500,R = 15, Crit = "LV", all.plot = FALSE){
   T = length(Y_T)
   Output_list = as.list(1:R)
 
@@ -59,6 +59,7 @@ Example3_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max
     zetaout_ts = ts(zetaout[1,]) #1 oder 2 wählen je nachdem, wie das Modell die Regime zuordnet
 
     time_vals = time(zetaout_ts)
+    if(all.plot == TRUE){
     plot(zetaout_ts, type = "l", col = "blue", lwd = 2,
          main = "Probability of Regime 2",
          xlab = "Year", ylab = "Probability")
@@ -70,13 +71,14 @@ Example3_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max
     }
     lines(zetaout_ts, col = "blue", lwd = 2)
     abline(h = threshold, col = "black", lty = 2)
-
+}
     years = floor(time(zetaout_ts))
 
 
     zetaout_ts_M = ts(t(zetaout))
+    if(all.plot == TRUE){
     plot(zetaout_ts_M,plot.type = "single", col = c(1:N), lwd = 2)
-    plot(zetaout_ts_M, col = c(1:N), lwd = 2)
+    plot(zetaout_ts_M, col = c(1:N), lwd = 2)}
 
     Predicted_Regime = apply(zetaout_ts_M,1,function(row){which(row == max(row))})
 
@@ -96,6 +98,7 @@ Example3_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max
     xplot = time(Y_T[-(1:K)])
     xxplot = c(xplot,rev(xplot))
     yyplot = c(Y_T[-(1:K)],rev(ts(Yhat_insample)))
+    if(all.plot == TRUE){
     plot(cbind(Y_T[-(1:K)],ts(Yhat_insample)),plot.type = "single", col = c("black","blue"),lwd = c(1,2), lty = 1,main = "In Sample Fit", ylab = "Values")
     polygon(xxplot,yyplot,col = "lightblue",border = FALSE)
     for (i in which(above_threshold)) {
@@ -106,7 +109,7 @@ Example3_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max
     lines(ts(Yhat_insample),lwd = 2, col = "blue")
     lines(Y_T[-(1:K)],lwd = 1, col = "black")
     legend("bottomleft",fill = c("black","blue","red"),legend = c("Actual Time Series","In Sample Fit","Predicted Regime 2"))
-
+    }
 
     RSS = sum((Y_T[-(1:K)] - ts(Yhat_insample))^2)
     residuals = Y_T[-(1:K)] - Yhat_insample
@@ -144,17 +147,220 @@ Example3_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max
     RCM_list[[r]] = output$RCM
     Entropy_list[[r]] = output$Entropy
   }
+
+
+
+
   if(Crit == "LV"){
+
     output = Output_list[[which.max(LV_list)]]
+
+    P = output$P
+    alpha = output$alpha
+    zeta_out = output$zeta_t_T
+    Y_T = output$Y_T
+    Yhat_insample = output$Yhat_insample
+
+
+    zetaout_ts = ts(zetaout[1,])
+    time_vals = time(zetaout_ts)
+    plot(zetaout_ts, type = "l", col = "blue", lwd = 2,
+         main = "Probability of Regime 2",
+         xlab = "Year", ylab = "Probability")
+    above_threshold = zetaout_ts > threshold
+    for (i in which(above_threshold)) {
+      rect(time_vals[i] - 0.5 / frequency(zetaout_ts), par("usr")[3],
+           time_vals[i] + 0.5 / frequency(zetaout_ts), par("usr")[4],
+           col = rgb(1, 0, 0, alpha = 0.2), border = NA)
+    }
+    lines(zetaout_ts, col = "blue", lwd = 2)
+    abline(h = threshold, col = "black", lty = 2)
+
+
+    zetaout_ts_M = ts(t(zetaout))
+    plot(zetaout_ts_M,plot.type = "single", col = c(1:N), lwd = 2)
+    plot(zetaout_ts_M, col = c(1:N), lwd = 2)
+
+
+
+
+
+    xplot = time(Y_T[-(1:K)])
+    xxplot = c(xplot,rev(xplot))
+    yyplot = c(Y_T[-(1:K)],rev(ts(Yhat_insample)))
+    plot(cbind(Y_T[-(1:K)],ts(Yhat_insample)),plot.type = "single", col = c("black","blue"),lwd = c(1,2), lty = 1,main = "In Sample Fit", ylab = "Values")
+    polygon(xxplot,yyplot,col = "lightblue",border = FALSE)
+    for (i in which(above_threshold)) {
+      rect(time_vals[i] - 0.5 / frequency(zetaout_ts), par("usr")[3],
+           time_vals[i] + 0.5 / frequency(zetaout_ts), par("usr")[4],
+           col = rgb(1, 0, 0, alpha = 0.2), border = NA)
+    }
+    lines(ts(Yhat_insample),lwd = 2, col = "blue")
+    lines(Y_T[-(1:K)],lwd = 1, col = "black")
+    legend("bottomleft",fill = c("black","blue","red"),legend = c("Actual Time Series","In Sample Fit","Predicted Regime 2"))
+
+
+
+
+
+
+
+
+
+
+
+
+
   }else{
     if(Crit == "RSS"){
       output = Output_list[[which.min(RSS_list)]]
+
+      P = output$P
+      alpha = output$alpha
+      zeta_out = output$zeta_t_T
+      Y_T = output$Y_T
+      Yhat_insample = output$Yhat_insample
+
+
+      zetaout_ts = ts(zetaout[1,])
+      time_vals = time(zetaout_ts)
+      plot(zetaout_ts, type = "l", col = "blue", lwd = 2,
+           main = "Probability of Regime 2",
+           xlab = "Year", ylab = "Probability")
+      above_threshold = zetaout_ts > threshold
+      for (i in which(above_threshold)) {
+        rect(time_vals[i] - 0.5 / frequency(zetaout_ts), par("usr")[3],
+             time_vals[i] + 0.5 / frequency(zetaout_ts), par("usr")[4],
+             col = rgb(1, 0, 0, alpha = 0.2), border = NA)
+      }
+      lines(zetaout_ts, col = "blue", lwd = 2)
+      abline(h = threshold, col = "black", lty = 2)
+
+
+      zetaout_ts_M = ts(t(zetaout))
+      plot(zetaout_ts_M,plot.type = "single", col = c(1:N), lwd = 2)
+      plot(zetaout_ts_M, col = c(1:N), lwd = 2)
+
+
+
+
+
+      xplot = time(Y_T[-(1:K)])
+      xxplot = c(xplot,rev(xplot))
+      yyplot = c(Y_T[-(1:K)],rev(ts(Yhat_insample)))
+      plot(cbind(Y_T[-(1:K)],ts(Yhat_insample)),plot.type = "single", col = c("black","blue"),lwd = c(1,2), lty = 1,main = "In Sample Fit", ylab = "Values")
+      polygon(xxplot,yyplot,col = "lightblue",border = FALSE)
+      for (i in which(above_threshold)) {
+        rect(time_vals[i] - 0.5 / frequency(zetaout_ts), par("usr")[3],
+             time_vals[i] + 0.5 / frequency(zetaout_ts), par("usr")[4],
+             col = rgb(1, 0, 0, alpha = 0.2), border = NA)
+      }
+      lines(ts(Yhat_insample),lwd = 2, col = "blue")
+      lines(Y_T[-(1:K)],lwd = 1, col = "black")
+      legend("bottomleft",fill = c("black","blue","red"),legend = c("Actual Time Series","In Sample Fit","Predicted Regime 2"))
+
+
+
     }else{
       if(Crit == "RCM"){
         output = Output_list[[which.min(RCM_list)]]
+
+        P = output$P
+        alpha = output$alpha
+        zeta_out = output$zeta_t_T
+        Y_T = output$Y_T
+        Yhat_insample = output$Yhat_insample
+
+
+        zetaout_ts = ts(zetaout[1,])
+        time_vals = time(zetaout_ts)
+        plot(zetaout_ts, type = "l", col = "blue", lwd = 2,
+             main = "Probability of Regime 2",
+             xlab = "Year", ylab = "Probability")
+        above_threshold = zetaout_ts > threshold
+        for (i in which(above_threshold)) {
+          rect(time_vals[i] - 0.5 / frequency(zetaout_ts), par("usr")[3],
+               time_vals[i] + 0.5 / frequency(zetaout_ts), par("usr")[4],
+               col = rgb(1, 0, 0, alpha = 0.2), border = NA)
+        }
+        lines(zetaout_ts, col = "blue", lwd = 2)
+        abline(h = threshold, col = "black", lty = 2)
+
+
+        zetaout_ts_M = ts(t(zetaout))
+        plot(zetaout_ts_M,plot.type = "single", col = c(1:N), lwd = 2)
+        plot(zetaout_ts_M, col = c(1:N), lwd = 2)
+
+
+
+
+
+        xplot = time(Y_T[-(1:K)])
+        xxplot = c(xplot,rev(xplot))
+        yyplot = c(Y_T[-(1:K)],rev(ts(Yhat_insample)))
+        plot(cbind(Y_T[-(1:K)],ts(Yhat_insample)),plot.type = "single", col = c("black","blue"),lwd = c(1,2), lty = 1,main = "In Sample Fit", ylab = "Values")
+        polygon(xxplot,yyplot,col = "lightblue",border = FALSE)
+        for (i in which(above_threshold)) {
+          rect(time_vals[i] - 0.5 / frequency(zetaout_ts), par("usr")[3],
+               time_vals[i] + 0.5 / frequency(zetaout_ts), par("usr")[4],
+               col = rgb(1, 0, 0, alpha = 0.2), border = NA)
+        }
+        lines(ts(Yhat_insample),lwd = 2, col = "blue")
+        lines(Y_T[-(1:K)],lwd = 1, col = "black")
+        legend("bottomleft",fill = c("black","blue","red"),legend = c("Actual Time Series","In Sample Fit","Predicted Regime 2"))
+
+
+
       }else{
         if(Crit == "Entropy"){
           output = Output_list[[which.min(Entropy_list)]]
+
+          P = output$P
+          alpha = output$alpha
+          zeta_out = output$zeta_t_T
+          Y_T = output$Y_T
+          Yhat_insample = output$Yhat_insample
+
+
+          zetaout_ts = ts(zetaout[1,])
+          time_vals = time(zetaout_ts)
+          plot(zetaout_ts, type = "l", col = "blue", lwd = 2,
+               main = "Probability of Regime 2",
+               xlab = "Year", ylab = "Probability")
+          above_threshold = zetaout_ts > threshold
+          for (i in which(above_threshold)) {
+            rect(time_vals[i] - 0.5 / frequency(zetaout_ts), par("usr")[3],
+                 time_vals[i] + 0.5 / frequency(zetaout_ts), par("usr")[4],
+                 col = rgb(1, 0, 0, alpha = 0.2), border = NA)
+          }
+          lines(zetaout_ts, col = "blue", lwd = 2)
+          abline(h = threshold, col = "black", lty = 2)
+
+
+          zetaout_ts_M = ts(t(zetaout))
+          plot(zetaout_ts_M,plot.type = "single", col = c(1:N), lwd = 2)
+          plot(zetaout_ts_M, col = c(1:N), lwd = 2)
+
+
+
+
+
+          xplot = time(Y_T[-(1:K)])
+          xxplot = c(xplot,rev(xplot))
+          yyplot = c(Y_T[-(1:K)],rev(ts(Yhat_insample)))
+          plot(cbind(Y_T[-(1:K)],ts(Yhat_insample)),plot.type = "single", col = c("black","blue"),lwd = c(1,2), lty = 1,main = "In Sample Fit", ylab = "Values")
+          polygon(xxplot,yyplot,col = "lightblue",border = FALSE)
+          for (i in which(above_threshold)) {
+            rect(time_vals[i] - 0.5 / frequency(zetaout_ts), par("usr")[3],
+                 time_vals[i] + 0.5 / frequency(zetaout_ts), par("usr")[4],
+                 col = rgb(1, 0, 0, alpha = 0.2), border = NA)
+          }
+          lines(ts(Yhat_insample),lwd = 2, col = "blue")
+          lines(Y_T[-(1:K)],lwd = 1, col = "black")
+          legend("bottomleft",fill = c("black","blue","red"),legend = c("Actual Time Series","In Sample Fit","Predicted Regime 2"))
+
+
+
         }
       }
     }
