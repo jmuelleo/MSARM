@@ -33,11 +33,10 @@ Example3_alpha_next_function = function(alpha,P,Y_T,N,K){
   }
 
   for(i in 1:N){
-
-    sigma = sigma_j(alpha[i,-(K+2)],i)
+    sigma = sigma_j(beta_j = alpha[i,-(K+2)],j = i,Y_T = Y_T,N = N,K = K)
     result = lm(Y ~ X, weights = (zeta_YT[i,(K+1+K):T])/(sigma^2))
     Beta[i,] = result$coefficients
-    Sigma[i,] = (sigma_j(Beta[i,],i))^2
+    Sigma[i,] = (sigma_j(Beta[i,],i,Y_T,N,K))^2
   }
 
 
