@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @examples Example5_sigma_function(Y_T,alpha,P,Switcher,N,K)
-Example5_sigma_function = function(Y_T,alpha,P,Switcher,N,K){
+Example5_sigma_function = function(Y_T,alpha,P,Switcher,N,K,m){
 
   T = length(Y_T)
   zeta_YT = zeta_YT_function(alpha = alpha,P = P ,Y_T = Y_T,N = N,K = K)

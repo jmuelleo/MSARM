@@ -36,7 +36,7 @@ Example4_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max
     while(counter <= max){
 
       P_Sammler[[counter+1]] = P_ij_next_function(alpha = alpha_Sammler[[counter]],P = P_Sammler[[counter]],Y_T = Y_T,N = N,K = K,m)
-      alpha_Sammler[[counter+1]] = Example4_alpha_next_function_lastbeta(Y_T,alpha_Sammler[[counter]],P_Sammler[[counter]],Switcher,N,K)
+      alpha_Sammler[[counter+1]] = Example4_alpha_next_function_lastbeta(Y_T,alpha_Sammler[[counter]],P_Sammler[[counter]],Switcher,N,K,m)
       Log_value_l = Log_Likelihood_function(alpha_Sammler[[ifelse(counter-1>=1,counter-1,1)]],P_Sammler[[ifelse(counter-1>=1,counter-1,  1)]],Y_T,N,K)
       Log_value_n = Log_Likelihood_function(alpha_Sammler[[counter]],P_Sammler[[counter]],Y_T,N,K)
 

@@ -13,8 +13,8 @@
 #' @return This function brings, for Example 5 setups (Subset of the coefficient switches, error term variance switches), everything together and runs the EM-Algorithm
 #' @export
 #'
-#' @examples Example5_EM_Algorithm_function_lastbeta(Y_T,K,N,m,threshold = 0.5,max = 500,R = 15, Crit = "LV")
-Example5_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max = 500,R = 15, Crit = "LV", all.plot = FALSE){
+#' @examples Example5_EM_Algorithm_function_lastbeta(Y_T,K,N,m,threshold = 0.5,max = 500,R = 15, Crit = "LV",m)
+Example5_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max = 500,R = 15, Crit = "LV", all.plot = FALSE,m){
   Output_list = as.list(1:R)
   T = length(Y_T)
   LV_list = as.list(1:R)
@@ -36,7 +36,7 @@ Example5_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max
     while(counter <= max){
 
       P_Sammler[[counter+1]] = P_ij_next_function(alpha_Sammler[[counter]],P_Sammler[[counter]],Y_T,N,K,m)
-      alpha_Sammler[[counter+1]] = Example5_alpha_next_function_lastbeta(Y_T,alpha_Sammler[[counter]],P_Sammler[[counter]],Switcher,N,K)
+      alpha_Sammler[[counter+1]] = Example5_alpha_next_function_lastbeta(Y_T,alpha_Sammler[[counter]],P_Sammler[[counter]],Switcher,N,K,m)
       Log_value_l = Log_Likelihood_function(alpha_Sammler[[ifelse(counter-1>=1,counter-1,1)]],P_Sammler[[ifelse(counter-1>=1,counter-1,  1)]],Y_T,N,K)
       Log_value_n = Log_Likelihood_function(alpha_Sammler[[counter]],P_Sammler[[counter]],Y_T,N,K)
 

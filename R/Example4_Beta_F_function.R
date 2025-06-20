@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @examples Example4_Beta_F_function(Y_T,alpha,P,Switcher = Switcher,N,K)
-Example4_Beta_F_function = function(Y_T,alpha,P,Switcher = Switcher,N,K){
+Example4_Beta_F_function = function(Y_T,alpha,P,Switcher = Switcher,N,K,m){
   if(sum(!(Switcher[-(K+2)])) > 0){
     zeta_YT = zeta_YT_function(alpha,P,Y_T,N,K)
     T = length(Y_T)

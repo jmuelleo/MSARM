@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @examples Example5_Beta_F_function(Y_T,alpha,P,Switcher,N,K)
-Example5_Beta_F_function = function(Y_T,alpha,P,Switcher,N,K){
+Example5_Beta_F_function = function(Y_T,alpha,P,Switcher,N,K,m){
   T = length(Y_T)
   zeta_YT = zeta_YT_function(alpha,P,Y_T,N,K)
   p = zeta_YT[,(K+K+1):T]
@@ -34,7 +34,7 @@ Example5_Beta_F_function = function(Y_T,alpha,P,Switcher,N,K){
   S_count = sum(coef_Switcher == TRUE)
 
 
-  sigma = Example5_sigma_function(Y_T,alpha,P,Switcher,N,K)
+  sigma = Example5_sigma_function(Y_T,alpha,P,Switcher,N,K,m)
 
 
   start_matrix = matrix(0,nrow = F_count,ncol = F_count)

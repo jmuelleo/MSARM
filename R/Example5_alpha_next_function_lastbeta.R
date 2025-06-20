@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @examples Example5_alpha_next_function_lastbeta(Y_T,alpha,P,Switcher,N,K)
-Example5_alpha_next_function_lastbeta = function(Y_T,alpha,P,Switcher,N,K){
+Example5_alpha_next_function_lastbeta = function(Y_T,alpha,P,Switcher,N,K,m){
   T = length(Y_T)
   zeta_YT = zeta_YT_function(alpha,P,Y_T,N,K)
   p = zeta_YT[,(K+K+1+m):T]
@@ -32,8 +32,8 @@ Example5_alpha_next_function_lastbeta = function(Y_T,alpha,P,Switcher,N,K){
   F_count = sum(coef_Switcher == FALSE)
   S_count = sum(coef_Switcher == TRUE)
 
-  Beta_F_value = Example5_Beta_F_function(Y_T,alpha,P,Switcher,N,K)
-  sigma = Example5_sigma_function(Y_T,alpha,P,Switcher,N,K)
+  Beta_F_value = Example5_Beta_F_function(Y_T,alpha,P,Switcher,N,K,m)
+  sigma = Example5_sigma_function(Y_T,alpha,P,Switcher,N,K,m)
   Beta = matrix(5,ncol = K+1, nrow = N)
   Residuals = matrix(5,ncol = N,nrow = T-K-K-m)
 
