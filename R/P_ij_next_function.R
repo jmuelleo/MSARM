@@ -10,7 +10,7 @@
 #' @export
 #'
 #' @examples P_ij_next_function(alpha,P,Y_T,N,K)
-P_ij_next_function = function(alpha,P,Y_T,N,K){
+P_ij_next_function = function(alpha,P,Y_T,N,K,m){
   T = length(Y_T)
   zeta_list = zeta_Yt_function(alpha = alpha,P = P,Y_T = Y_T,N = N,K = K)
   zeta_t_t = zeta_list[[1]]
