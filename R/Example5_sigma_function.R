@@ -13,7 +13,8 @@
 #' @examples Example5_sigma_function(Y_T,alpha,P,Switcher,N,K)
 Example5_sigma_function = function(Y_T,alpha,P,Switcher,N,K){
 
-  zeta_YT = zeta_YT_function(alpha,P,Y_T,N,K)
+  T = length(Y_T)
+  zeta_YT = zeta_YT_function(alpha = alpha,P = P ,Y_T = Y_T,N = N,K = K)
   p = zeta_YT[,(K+K+1+m):T]
 
   X = matrix(0,ncol = K+1,nrow = T-K-K-m)
