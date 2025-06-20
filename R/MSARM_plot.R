@@ -18,7 +18,7 @@ MSARM.plot = function(res_MSARM.predict,conf = FALSE){
   total_series = ts(c(Y_T,fcast))
   T = length(total_series)
   time_new = time(total_series)[(T-n.ahead):T]
-  plot(ts(Y_T),lty = 1)
+  plot(ts(Y_T),lty = 1, xlim = c(range(time(total_series))))
   time_new_poly = time(total_series)[(T-n.ahead+1):T]
   xx = c(time_new_poly,rev(time_new_poly))
 
