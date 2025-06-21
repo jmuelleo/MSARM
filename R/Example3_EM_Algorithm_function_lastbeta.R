@@ -190,11 +190,22 @@ Example3_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max
     yyplot = c(Y_T[-(1:K)],rev(ts(Yhat_insample)))
     plot(cbind(Y_T[-(1:K)],ts(Yhat_insample)),plot.type = "single", col = c("black","blue"),lwd = c(1,2), lty = 1,main = "In Sample Fit", ylab = "Values")
     polygon(xxplot,yyplot,col = "lightblue",border = FALSE)
-    for (i in which(above_threshold)) {
-      rect(time_vals[i] - 0.5 / frequency(zetaout_ts), par("usr")[3],
-           time_vals[i] + 0.5 / frequency(zetaout_ts), par("usr")[4],
-           col = rgb(1, 0, 0, alpha = 0.2), border = NA)
+
+
+    zetout_length = length(zetaout_ts)
+    above_threshold_matrix = matrix(0,ncol = zetout_length, nrow = N-1 )
+    for(l in 1:(N-1)){
+      above_threshold_matrix[l,] = ts(zetaout[l,]) > threshold
+
+
+      for (i in which(above_threshold_matrix[l,])) {
+        rect(time_vals[i] - 0.5 / frequency(zetaout_ts), par("usr")[3],
+             time_vals[i] + 0.5 / frequency(zetaout_ts), par("usr")[4],
+             col = rgb(1/l, 0, 0, alpha = 0.2), border = NA)
+      }
     }
+
+
     lines(ts(Yhat_insample),lwd = 2, col = "blue")
     lines(Y_T[-(1:K)],lwd = 1, col = "black")
     legend("bottomleft",fill = c("black","blue","red"),legend = c("Actual Time Series","In Sample Fit","Predicted Regime 2"))
@@ -244,17 +255,27 @@ Example3_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max
 
 
 
-
       xplot = time(Y_T[-(1:K)])
       xxplot = c(xplot,rev(xplot))
       yyplot = c(Y_T[-(1:K)],rev(ts(Yhat_insample)))
       plot(cbind(Y_T[-(1:K)],ts(Yhat_insample)),plot.type = "single", col = c("black","blue"),lwd = c(1,2), lty = 1,main = "In Sample Fit", ylab = "Values")
       polygon(xxplot,yyplot,col = "lightblue",border = FALSE)
-      for (i in which(above_threshold)) {
-        rect(time_vals[i] - 0.5 / frequency(zetaout_ts), par("usr")[3],
-             time_vals[i] + 0.5 / frequency(zetaout_ts), par("usr")[4],
-             col = rgb(1, 0, 0, alpha = 0.2), border = NA)
+
+
+      zetout_length = length(zetaout_ts)
+      above_threshold_matrix = matrix(0,ncol = zetout_length, nrow = N-1 )
+      for(l in 1:(N-1)){
+        above_threshold_matrix[l,] = ts(zetaout[l,]) > threshold
+
+
+        for (i in which(above_threshold_matrix[l,])) {
+          rect(time_vals[i] - 0.5 / frequency(zetaout_ts), par("usr")[3],
+               time_vals[i] + 0.5 / frequency(zetaout_ts), par("usr")[4],
+               col = rgb(1/l, 0, 0, alpha = 0.2), border = NA)
+        }
       }
+
+
       lines(ts(Yhat_insample),lwd = 2, col = "blue")
       lines(Y_T[-(1:K)],lwd = 1, col = "black")
       legend("bottomleft",fill = c("black","blue","red"),legend = c("Actual Time Series","In Sample Fit","Predicted Regime 2"))
@@ -300,11 +321,22 @@ Example3_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max
         yyplot = c(Y_T[-(1:K)],rev(ts(Yhat_insample)))
         plot(cbind(Y_T[-(1:K)],ts(Yhat_insample)),plot.type = "single", col = c("black","blue"),lwd = c(1,2), lty = 1,main = "In Sample Fit", ylab = "Values")
         polygon(xxplot,yyplot,col = "lightblue",border = FALSE)
-        for (i in which(above_threshold)) {
-          rect(time_vals[i] - 0.5 / frequency(zetaout_ts), par("usr")[3],
-               time_vals[i] + 0.5 / frequency(zetaout_ts), par("usr")[4],
-               col = rgb(1, 0, 0, alpha = 0.2), border = NA)
+
+
+        zetout_length = length(zetaout_ts)
+        above_threshold_matrix = matrix(0,ncol = zetout_length, nrow = N-1 )
+        for(l in 1:(N-1)){
+          above_threshold_matrix[l,] = ts(zetaout[l,]) > threshold
+
+
+          for (i in which(above_threshold_matrix[l,])) {
+            rect(time_vals[i] - 0.5 / frequency(zetaout_ts), par("usr")[3],
+                 time_vals[i] + 0.5 / frequency(zetaout_ts), par("usr")[4],
+                 col = rgb(1/l, 0, 0, alpha = 0.2), border = NA)
+          }
         }
+
+
         lines(ts(Yhat_insample),lwd = 2, col = "blue")
         lines(Y_T[-(1:K)],lwd = 1, col = "black")
         legend("bottomleft",fill = c("black","blue","red"),legend = c("Actual Time Series","In Sample Fit","Predicted Regime 2"))
@@ -350,11 +382,22 @@ Example3_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max
           yyplot = c(Y_T[-(1:K)],rev(ts(Yhat_insample)))
           plot(cbind(Y_T[-(1:K)],ts(Yhat_insample)),plot.type = "single", col = c("black","blue"),lwd = c(1,2), lty = 1,main = "In Sample Fit", ylab = "Values")
           polygon(xxplot,yyplot,col = "lightblue",border = FALSE)
-          for (i in which(above_threshold)) {
-            rect(time_vals[i] - 0.5 / frequency(zetaout_ts), par("usr")[3],
-                 time_vals[i] + 0.5 / frequency(zetaout_ts), par("usr")[4],
-                 col = rgb(1, 0, 0, alpha = 0.2), border = NA)
+
+
+          zetout_length = length(zetaout_ts)
+          above_threshold_matrix = matrix(0,ncol = zetout_length, nrow = N-1 )
+          for(l in 1:(N-1)){
+            above_threshold_matrix[l,] = ts(zetaout[l,]) > threshold
+
+
+            for (i in which(above_threshold_matrix[l,])) {
+              rect(time_vals[i] - 0.5 / frequency(zetaout_ts), par("usr")[3],
+                   time_vals[i] + 0.5 / frequency(zetaout_ts), par("usr")[4],
+                   col = rgb(1/l, 0, 0, alpha = 0.2), border = NA)
+            }
           }
+
+
           lines(ts(Yhat_insample),lwd = 2, col = "blue")
           lines(Y_T[-(1:K)],lwd = 1, col = "black")
           legend("bottomleft",fill = c("black","blue","red"),legend = c("Actual Time Series","In Sample Fit","Predicted Regime 2"))
