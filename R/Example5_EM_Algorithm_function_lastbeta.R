@@ -195,7 +195,7 @@ if(all.plot == TRUE){
     above_threshold_matrix[l,] = ts(zetaout[l,]) > threshold
 
 
-    for (i in which(above_threshold_matrix[l,])) {
+    for (i in which(above_threshold_matrix[l,] == 1)) {
       rect(time_vals[i] - 0.5 / frequency(zetaout_ts), par("usr")[3],
            time_vals[i] + 0.5 / frequency(zetaout_ts), par("usr")[4],
            col = rgb(1/l, 0, 0, alpha = 0.2), border = NA)
@@ -253,7 +253,7 @@ if(all.plot == TRUE){
         above_threshold_matrix[l,] = ts(zetaout[l,]) > threshold
 
 
-        for (i in which(above_threshold_matrix[l,])) {
+        for (i in which(above_threshold_matrix[l,] == 1)) {
           rect(time_vals[i] - 0.5 / frequency(zetaout_ts), par("usr")[3],
                time_vals[i] + 0.5 / frequency(zetaout_ts), par("usr")[4],
                col = rgb(1/l, 0, 0, alpha = 0.2), border = NA)
@@ -310,7 +310,7 @@ if(all.plot == TRUE){
           above_threshold_matrix[l,] = ts(zetaout[l,]) > threshold
 
 
-          for (i in which(above_threshold_matrix[l,])) {
+          for (i in which(above_threshold_matrix[l,] == 1)) {
             rect(time_vals[i] - 0.5 / frequency(zetaout_ts), par("usr")[3],
                  time_vals[i] + 0.5 / frequency(zetaout_ts), par("usr")[4],
                  col = rgb(1/l, 0, 0, alpha = 0.2), border = NA)
@@ -367,7 +367,7 @@ if(all.plot == TRUE){
             above_threshold_matrix[l,] = ts(zetaout[l,]) > threshold
 
 
-            for (i in which(above_threshold_matrix[l,])) {
+            for (i in which(above_threshold_matrix[l,] == 1)) {
               rect(time_vals[i] - 0.5 / frequency(zetaout_ts), par("usr")[3],
                    time_vals[i] + 0.5 / frequency(zetaout_ts), par("usr")[4],
                    col = rgb(1/l, 0, 0, alpha = 0.2), border = NA)
