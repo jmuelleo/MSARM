@@ -190,7 +190,7 @@ if(all.plot == TRUE){
       for (i in which(above_threshold_matrix[l,] == 1)) {
         rect(time_vals[i] - 0.5 / frequency(zetaout_ts), par("usr")[3],
              time_vals[i] + 0.5 / frequency(zetaout_ts), par("usr")[4],
-             col = rgb(1/l, 0, 0, alpha = 0.2), border = NA)
+             col = rgb(1/l, ifelse(l > 1, 1/(l-1), 0), ifelse(l > 2, 1/(l-2), 0), alpha = 0.2), border = NA)
       }
     }
 
@@ -247,7 +247,7 @@ if(all.plot == TRUE){
         for (i in which(above_threshold_matrix[l,] == 1)) {
           rect(time_vals[i] - 0.5 / frequency(zetaout_ts), par("usr")[3],
                time_vals[i] + 0.5 / frequency(zetaout_ts), par("usr")[4],
-               col = rgb(1/l, 0, 0, alpha = 0.2), border = NA)
+               col = rgb(1/l, ifelse(l > 1, 1/(l-1), 0), ifelse(l > 2, 1/(l-2), 0), alpha = 0.2), border = NA)
         }
       }
 
@@ -304,7 +304,7 @@ if(all.plot == TRUE){
           for (i in which(above_threshold_matrix[l,] == 1)) {
             rect(time_vals[i] - 0.5 / frequency(zetaout_ts), par("usr")[3],
                  time_vals[i] + 0.5 / frequency(zetaout_ts), par("usr")[4],
-                 col = rgb(1/l, 0, 0, alpha = 0.2), border = NA)
+                 col = rgb(1/l, ifelse(l > 1, 1/(l-1), 0), ifelse(l > 2, 1/(l-2), 0), alpha = 0.2), border = NA)
           }
         }
 
@@ -361,7 +361,7 @@ if(all.plot == TRUE){
             for (i in which(above_threshold_matrix[l,] == 1)) {
               rect(time_vals[i] - 0.5 / frequency(zetaout_ts), par("usr")[3],
                    time_vals[i] + 0.5 / frequency(zetaout_ts), par("usr")[4],
-                   col = rgb(1/l, 0, 0, alpha = 0.2), border = NA)
+                   col = rgb(1/l, ifelse(l > 1, 1/(l-1), 0), ifelse(l > 2, 1/(l-2), 0), alpha = 0.2), border = NA)
             }
           }
 
