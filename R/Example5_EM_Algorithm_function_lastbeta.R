@@ -148,7 +148,7 @@ if(all.plot == TRUE){
     output = Output_list[[which.max(LV_list)]]
     P = output$P
     alpha = output$alpha
-    zeta_out = output$zeta_t_T
+    zetaout = output$zeta_t_T
     Y_T = output$Y_T
     Yhat_insample = output$Yhat_insample
 
@@ -212,7 +212,7 @@ if(all.plot == TRUE){
       output = Output_list[[which.min(RSS_list)]]
       P = output$P
       alpha = output$alpha
-      zeta_out = output$zeta_t_T
+      zetaout = output$zeta_t_T
       Y_T = output$Y_T
       Yhat_insample = output$Yhat_insample
 
@@ -269,7 +269,7 @@ if(all.plot == TRUE){
         output = Output_list[[which.min(RCM_list)]]
         P = output$P
         alpha = output$alpha
-        zeta_out = output$zeta_t_T
+        zetaout = output$zeta_t_T
         Y_T = output$Y_T
         Yhat_insample = output$Yhat_insample
 
@@ -326,7 +326,7 @@ if(all.plot == TRUE){
           output = Output_list[[which.min(Entropy_list)]]
           P = output$P
           alpha = output$alpha
-          zeta_out = output$zeta_t_T
+          zetaout = output$zeta_t_T
           Y_T = output$Y_T
           Yhat_insample = output$Yhat_insample
 

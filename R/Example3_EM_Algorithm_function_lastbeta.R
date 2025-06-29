@@ -157,7 +157,7 @@ Example3_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max
 
     P = output$P
     alpha = output$alpha
-    zeta_out = output$zeta_t_T
+    zetaout = output$zeta_t_T
     Y_T = output$Y_T
     Yhat_insample = output$Yhat_insample
 
@@ -228,7 +228,7 @@ Example3_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max
 
       P = output$P
       alpha = output$alpha
-      zeta_out = output$zeta_t_T
+      zetaout = output$zeta_t_T
       Y_T = output$Y_T
       Yhat_insample = output$Yhat_insample
 
@@ -288,7 +288,7 @@ Example3_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max
 
         P = output$P
         alpha = output$alpha
-        zeta_out = output$zeta_t_T
+        zetaout = output$zeta_t_T
         Y_T = output$Y_T
         Yhat_insample = output$Yhat_insample
 
@@ -349,7 +349,7 @@ Example3_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max
 
           P = output$P
           alpha = output$alpha
-          zeta_out = output$zeta_t_T
+          zetaout = output$zeta_t_T
           Y_T = output$Y_T
           Yhat_insample = output$Yhat_insample
 

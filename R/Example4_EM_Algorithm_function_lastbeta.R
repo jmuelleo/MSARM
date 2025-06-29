@@ -55,12 +55,13 @@ Example4_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max
 
     zetaout = zeta_YT_function(alpha_Sammler[[max+1]],P_Sammler[[max+1]],Y_T,N,K)[,-(1:(K))]
     zetaout_ts = ts(zetaout[1,]) #1 oder 2 wählen je nachdem, wie das Modell die Regime zuordnet
-if(all.plot == TRUE){
+
     time_vals = time(zetaout_ts)
+    above_threshold = zetaout_ts > threshold
+    if(all.plot == TRUE){
     plot(zetaout_ts, type = "l", col = "blue", lwd = 2,
          main = "Probability of Regime 2",
          xlab = "Year", ylab = "Probability")
-    above_threshold = zetaout_ts > threshold
     for (i in which(above_threshold)) {
       rect(time_vals[i] - 0.5 / frequency(zetaout_ts), par("usr")[3],
            time_vals[i] + 0.5 / frequency(zetaout_ts), par("usr")[4],
@@ -104,7 +105,6 @@ if(all.plot == TRUE){
     lines(ts(Yhat_insample),lwd = 2, col = "blue")
     lines(Y_T[-(1:K)],lwd = 1, col = "black")
     legend("bottomleft",fill = c("black","blue","red"),legend = c("Actual Time Series","In Sample Fit","Predicted Regime 2"))
-
 }
     RSS = sum((Y_T[-(1:K)] - ts(Yhat_insample))^2)
     residuals = Y_T[-(1:K)] - Yhat_insample
@@ -146,7 +146,7 @@ if(all.plot == TRUE){
     output = Output_list[[which.max(LV_list)]]
     P = output$P
     alpha = output$alpha
-    zeta_out = output$zeta_t_T
+    zetaout = output$zeta_t_T
     Y_T = output$Y_T
     Yhat_insample = output$Yhat_insample
 
@@ -203,7 +203,7 @@ if(all.plot == TRUE){
       output = Output_list[[which.min(RSS_list)]]
       P = output$P
       alpha = output$alpha
-      zeta_out = output$zeta_t_T
+      zetaout = output$zeta_t_T
       Y_T = output$Y_T
       Yhat_insample = output$Yhat_insample
 
@@ -260,7 +260,7 @@ if(all.plot == TRUE){
         output = Output_list[[which.min(RCM_list)]]
         P = output$P
         alpha = output$alpha
-        zeta_out = output$zeta_t_T
+        zetaout = output$zeta_t_T
         Y_T = output$Y_T
         Yhat_insample = output$Yhat_insample
 
@@ -317,7 +317,7 @@ if(all.plot == TRUE){
           output = Output_list[[which.min(Entropy_list)]]
           P = output$P
           alpha = output$alpha
-          zeta_out = output$zeta_t_T
+          zetaout = output$zeta_t_T
           Y_T = output$Y_T
           Yhat_insample = output$Yhat_insample
 
