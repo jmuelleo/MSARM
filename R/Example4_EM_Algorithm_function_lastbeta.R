@@ -104,7 +104,7 @@ if(all.plot == TRUE){
     }
     lines(ts(Yhat_insample),lwd = 2, col = "blue")
     lines(Y_T[-(1:K)],lwd = 1, col = "black")
-    legend("bottomleft",fill = c("black","blue","red"),legend = c("Actual Time Series","In Sample Fit","Predicted Regime 2"))
+    legend("bottomleft",fill = c("black","blue","red"),legend = c("Actual Time Series","In Sample Fit","Predicted Regime"))
 }
     RSS = sum((Y_T[-(1:K)] - ts(Yhat_insample))^2)
     residuals = Y_T[-(1:K)] - Yhat_insample
