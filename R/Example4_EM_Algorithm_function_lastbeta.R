@@ -181,6 +181,10 @@ if(all.plot == TRUE){
     polygon(xxplot,yyplot,col = "lightblue",border = FALSE)
 
 
+    regime_colors <- sapply(1:(N - 1), function(l) {
+      rgb(1 / l, ifelse(l > 1, 1 / (l - 1), 0), ifelse(l > 2, 1 / (l - 2), 0), alpha = 0.2)
+    })
+
     zetout_length = length(zetaout_ts)
     above_threshold_matrix = matrix(0,ncol = zetout_length, nrow = N-1 )
     for(l in 1:(N-1)){
@@ -195,9 +199,13 @@ if(all.plot == TRUE){
     }
 
 
+
     lines(ts(Yhat_insample),lwd = 2, col = "blue")
     lines(Y_T[-(1:K)],lwd = 1, col = "black")
-    legend("bottomleft",fill = c("black","blue","red"),legend = c("Actual Time Series","In Sample Fit","Predicted Regime 2"))
+
+    legend_labels <- c("Actual Time Series", "In Sample Fit", paste0("Regime ", 1:(N - 1)))
+    legend_colors <- c("black", "blue", regime_colors)
+    legend("bottomleft", fill = legend_colors, legend = legend_labels)
   }else{
     if(Crit == "RSS"){
       output = Output_list[[which.min(RSS_list)]]
@@ -238,6 +246,10 @@ if(all.plot == TRUE){
       polygon(xxplot,yyplot,col = "lightblue",border = FALSE)
 
 
+      regime_colors <- sapply(1:(N - 1), function(l) {
+        rgb(1 / l, ifelse(l > 1, 1 / (l - 1), 0), ifelse(l > 2, 1 / (l - 2), 0), alpha = 0.2)
+      })
+
       zetout_length = length(zetaout_ts)
       above_threshold_matrix = matrix(0,ncol = zetout_length, nrow = N-1 )
       for(l in 1:(N-1)){
@@ -252,9 +264,13 @@ if(all.plot == TRUE){
       }
 
 
+
       lines(ts(Yhat_insample),lwd = 2, col = "blue")
       lines(Y_T[-(1:K)],lwd = 1, col = "black")
-      legend("bottomleft",fill = c("black","blue","red"),legend = c("Actual Time Series","In Sample Fit","Predicted Regime 2"))
+
+      legend_labels <- c("Actual Time Series", "In Sample Fit", paste0("Regime ", 1:(N - 1)))
+      legend_colors <- c("black", "blue", regime_colors)
+      legend("bottomleft", fill = legend_colors, legend = legend_labels)
     }else{
       if(Crit == "RCM"){
         output = Output_list[[which.min(RCM_list)]]
@@ -295,6 +311,10 @@ if(all.plot == TRUE){
         polygon(xxplot,yyplot,col = "lightblue",border = FALSE)
 
 
+        regime_colors <- sapply(1:(N - 1), function(l) {
+          rgb(1 / l, ifelse(l > 1, 1 / (l - 1), 0), ifelse(l > 2, 1 / (l - 2), 0), alpha = 0.2)
+        })
+
         zetout_length = length(zetaout_ts)
         above_threshold_matrix = matrix(0,ncol = zetout_length, nrow = N-1 )
         for(l in 1:(N-1)){
@@ -309,9 +329,13 @@ if(all.plot == TRUE){
         }
 
 
+
         lines(ts(Yhat_insample),lwd = 2, col = "blue")
         lines(Y_T[-(1:K)],lwd = 1, col = "black")
-        legend("bottomleft",fill = c("black","blue","red"),legend = c("Actual Time Series","In Sample Fit","Predicted Regime 2"))
+
+        legend_labels <- c("Actual Time Series", "In Sample Fit", paste0("Regime ", 1:(N - 1)))
+        legend_colors <- c("black", "blue", regime_colors)
+        legend("bottomleft", fill = legend_colors, legend = legend_labels)
       }else{
         if(Crit == "Entropy"){
           output = Output_list[[which.min(Entropy_list)]]
@@ -352,6 +376,10 @@ if(all.plot == TRUE){
           polygon(xxplot,yyplot,col = "lightblue",border = FALSE)
 
 
+          regime_colors <- sapply(1:(N - 1), function(l) {
+            rgb(1 / l, ifelse(l > 1, 1 / (l - 1), 0), ifelse(l > 2, 1 / (l - 2), 0), alpha = 0.2)
+          })
+
           zetout_length = length(zetaout_ts)
           above_threshold_matrix = matrix(0,ncol = zetout_length, nrow = N-1 )
           for(l in 1:(N-1)){
@@ -366,9 +394,13 @@ if(all.plot == TRUE){
           }
 
 
+
           lines(ts(Yhat_insample),lwd = 2, col = "blue")
           lines(Y_T[-(1:K)],lwd = 1, col = "black")
-          legend("bottomleft",fill = c("black","blue","red"),legend = c("Actual Time Series","In Sample Fit","Predicted Regime 2"))
+
+          legend_labels <- c("Actual Time Series", "In Sample Fit", paste0("Regime ", 1:(N - 1)))
+          legend_colors <- c("black", "blue", regime_colors)
+          legend("bottomleft", fill = legend_colors, legend = legend_labels)
         }
       }
     }
