@@ -1,13 +1,15 @@
+
 #' alpha_0_function
 #'
 #' @param Y_T Data
-#' @param N Number of underlying Regimes
-#' @param K Lag order of the AR-Model
+#' @param N Number of underlying regimes
+#' @param K Lag-order of the AR model
 #'
-#' @return A random starting value of alpha is generated
+#' @return A random starting value of alpha is generated so that the EM algorithm can start
 #' @export
 #'
-#' @examples alpha_0_function(Y_T,N,K)
+#' @examples
+#' alpha_0_function = function(Y_T,N,K)
 alpha_0_function = function(Y_T,N,K){
   T = length(Y_T)
   alpha = matrix(0,nrow = N,ncol = K+2)
