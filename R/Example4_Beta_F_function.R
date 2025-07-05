@@ -1,16 +1,18 @@
-#' Title
-#'
+
+#' Example4_Beta_F_function
+#' Example4_Beta_F_function allows its user to estimate the fixed coefficients vector called beta_F, based on the results from the previous iteration and the formulas in Müller (2025, page 21)
 #' @param Y_T Data
-#' @param alpha alpha vector (intercept, coefficients and error variance) from the last iteration
-#' @param P Transpose of the transition matrix Pi
-#' @param Switcher Switching-vector, a vector of (TRUE/FALSE) of the length K+2, which indicates which parameters are supposed to switch
-#' @param N Number of underlying Regimes
-#' @param K Lag order of the AR-Model
+#' @param alpha alpha matrix from the previous iteration
+#' @param P P matrix from the previous iteration
+#' @param Switcher Switching vector indicating which parameters switch
+#' @param N Number of underlying regimes
+#' @param K Lag-order of the AR model
+#' @param m Number of time periods the conditional log-likelihood conditions on
 #'
 #' @return
 #' @export
 #'
-#' @examples Example4_Beta_F_function(Y_T,alpha,P,Switcher = Switcher,N,K)
+#' @examples Example4_Beta_F_function(Y_T,alpha,P,Switcher = Switcher,N,K,m)
 Example4_Beta_F_function = function(Y_T,alpha,P,Switcher = Switcher,N,K,m){
   if(sum(!(Switcher[-(K+2)])) > 0){
     zeta_YT = zeta_YT_function(alpha,P,Y_T,N,K)
