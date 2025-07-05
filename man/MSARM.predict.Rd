@@ -5,15 +5,15 @@
 \title{MSARM.predict}
 \usage{
 MSARM.predict(
-  erg_MSARM.fit,
-  n.ahead,
+  res_MSARM.fit,
+  n.ahead = 1,
   boot = FALSE,
   levels = c(0.95, 0.9, 0.8, 0.7, 0.6),
   L = 10000
 )
 }
 \arguments{
-\item{erg_MSARM.fit}{Result of an MSARM.fit estimation}
+\item{res_MSARM.fit}{Result of an MSARM.fit estimation}
 
 \item{n.ahead}{Number of periods to be forecasted ahead}
 
@@ -31,5 +31,5 @@ boot = TRUE, in that case L bootstrap estimates and intervals will be created.
 MSARM.predict
 }
 \examples{
-MSARM.predict(erg_MSARM.fit, n.ahead, boot = FALSE, levels = c(0.95,0.9,0.8,0.7,0.6), L = 10000)
+MSARM.predict(res_MSARM.fit, n.ahead, boot = FALSE, levels = c(0.95,0.9,0.8,0.7,0.6), L = 10000)
 }

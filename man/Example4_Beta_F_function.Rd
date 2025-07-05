@@ -4,7 +4,7 @@
 \alias{Example4_Beta_F_function}
 \title{Title}
 \usage{
-Example4_Beta_F_function(Y_T, alpha, P, Switcher = Switcher, N, K)
+Example4_Beta_F_function(Y_T, alpha, P, Switcher = Switcher, N, K, m)
 }
 \arguments{
 \item{Y_T}{Data}

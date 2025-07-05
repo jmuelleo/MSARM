@@ -13,7 +13,8 @@ MSARM.fit(
   threshold_value = 0.5,
   max_value = 250,
   R_value = 5,
-  Crit_value = "LV"
+  Crit_value = "LV",
+  all.plot = FALSE
 )
 }
 \arguments{

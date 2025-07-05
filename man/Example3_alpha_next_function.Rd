@@ -4,25 +4,27 @@
 \alias{Example3_alpha_next_function}
 \title{Title}
 \usage{
-Example3_alpha_next_function(alpha, P, Y_T, N, K)
+Example3_alpha_next_function(alpha, P, Y_T, N, K, m)
 }
 \arguments{
 \item{alpha}{alpha vector (intercept, coefficients and error variance) from the last iteration}
 
-\item{P}{Transpose of the transition matrix Pi}
+\item{P}{transpose of the transition matrix (of the Markov-Chain) from the last iteration}
 
 \item{Y_T}{Data}
 
-\item{N}{Number of underlying Regimes}
+\item{N}{Number of regimes}
 
-\item{K}{Lag order of the AR-Model}
+\item{K}{Lag-order of the AR model}
+
+\item{m}{Number of time periods the conditional likelihood conditions on}
 }
 \value{
-Computes,for Example 3 setups (All Switching), the alpha matrix for the next iteration, based on the last iteration.
+The next alpha for Example 3 setups (all parameters switch) is computed as part of the EM algorithm
 }
 \description{
 Title
 }
 \examples{
-Example3_alpha_next_function(alpha,P,Y_T,N,K)
+Example3_alpha_next_function(alpha,P,Y_T,N,K,m)
 }

@@ -4,7 +4,7 @@
 \alias{Example5_sigma_function}
 \title{Title}
 \usage{
-Example5_sigma_function(Y_T, alpha, P, Switcher, N, K)
+Example5_sigma_function(Y_T, alpha, P, Switcher, N, K, m)
 }
 \arguments{
 \item{Y_T}{Data}

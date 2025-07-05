@@ -2,23 +2,24 @@
 % Please edit documentation in R/alpha_0_function.R
 \name{alpha_0_function}
 \alias{alpha_0_function}
-\title{alpha_0_function}
+\title{Title}
 \usage{
 alpha_0_function(Y_T, N, K)
 }
 \arguments{
 \item{Y_T}{Data}
 
-\item{N}{Number of underlying Regimes}
+\item{N}{Number of underlying regimes}
 
-\item{K}{Lag order of the AR-Model}
+\item{K}{Lag-order of the AR model}
 }
 \value{
-A random starting value of alpha is generated
+A random starting value of alpha is generated so that the EM algorithm can start
 }
 \description{
-alpha_0_function
+Title
 }
 \examples{
-alpha_0_function(Y_T,N,K)
+alpha_0_function = function(Y_T,N,K)
+
 }

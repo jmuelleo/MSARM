@@ -4,7 +4,7 @@
 \alias{Example4_alpha_next_function_lastbeta}
 \title{Title}
 \usage{
-Example4_alpha_next_function_lastbeta(Y_T, alpha, P, Switcher, N, K)
+Example4_alpha_next_function_lastbeta(Y_T, alpha, P, Switcher, N, K, m)
 }
 \arguments{
 \item{Y_T}{Data}

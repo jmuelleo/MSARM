@@ -12,32 +12,38 @@ Example3_EM_Algorithm_function_lastbeta(
   threshold = 0.5,
   max = 500,
   R = 15,
-  Crit = "LV"
+  Crit = "LV",
+  all.plot = FALSE,
+  Switcher
 )
 }
 \arguments{
 \item{Y_T}{Data}
 
-\item{K}{Lag order of the AR-Model}
+\item{K}{Lag-order of the AR model}
 
-\item{N}{Number of underlying Regimes}
+\item{N}{Number of underlying regimes}
 
-\item{m}{Number of observations to condition on}
+\item{m}{Number of time periods the conditional likelihood conditions on}
 
-\item{threshold}{Threshold for assigning the underlying regime based on the estimated probability}
+\item{threshold}{#threshold for assigning the predicted regimes}
 
-\item{max}{Number of iterations to go through}
+\item{max}{#number of iterations for the EM algorithm}
 
-\item{R}{Number of random starting points}
+\item{R}{#number of random starting points for the EM algorithm}
 
-\item{Crit}{Performance Metric to use for choosing the optimisation result}
+\item{Crit}{#performance metric for choosing one of the R optima}
+
+\item{all.plot}{#whether plots from all R optimisation attempts should be printed}
+
+\item{Switcher}{#Switching vector indicating which parameters switch}
 }
 \value{
-This function brings, for Example 3 setups (All Switching), everything together and runs the EM-Algorithm
+Example3_EM_Algorithm_function_lastbeta allows its user to apply the EM algorithm for estimating Markov-Switching models of the form of Example 3 (All Switching), as described in Müller (2025, page 18-19)
 }
 \description{
 Title
 }
 \examples{
-Example3_EM_Algorithm_function_lastbeta(Y_T,K,N,m,threshold = 0.5,max = 500,R = 15, Crit = "LV")
+Example3_EM_Algorithm_function_lastbeta(Y_T,K,N,m,threshold = 0.5,max = 500,R = 15, Crit = "LV", all.plot = FALSE, Switcher)
 }

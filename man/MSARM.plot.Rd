@@ -4,10 +4,10 @@
 \alias{MSARM.plot}
 \title{MSARM.plot()}
 \usage{
-MSARM.plot(erg_MSARM.predict, conf = FALSE)
+MSARM.plot(res_MSARM.predict, conf = FALSE, start = c(1, 1), freq = 1)
 }
 \arguments{
-\item{erg_MSARM.predict}{output from MSARM.predict}
+\item{res_MSARM.predict}{output from MSARM.predict}
 
 \item{conf}{if set to TRUE and MSARM.predict utilized boot = TRUE, then confidence intervals for the forecasts will be additionally plotted}
 }
@@ -19,5 +19,5 @@ MSARM.plot allows its user if conf = TRUE and boot = TRUE (in MSARM.predict) to 
 MSARM.plot()
 }
 \examples{
-MSARM.plot(erg_MSARM.predict,conf = TRUE)
+MSARM.plot(res_MSARM.predict,conf = TRUE)
 }

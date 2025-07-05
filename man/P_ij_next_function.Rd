@@ -4,7 +4,7 @@
 \alias{P_ij_next_function}
 \title{Title}
 \usage{
-P_ij_next_function(alpha, P, Y_T, N, K)
+P_ij_next_function(alpha, P, Y_T, N, K, m)
 }
 \arguments{
 \item{alpha}{alpha vector (intercept, coefficients and error variance) from the last iteration}

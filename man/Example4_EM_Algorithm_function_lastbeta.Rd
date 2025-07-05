@@ -12,7 +12,9 @@ Example4_EM_Algorithm_function_lastbeta(
   threshold = 0.5,
   max = 500,
   R = 15,
-  Crit = "LV"
+  Crit = "LV",
+  all.plot = FALSE,
+  Switcher
 )
 }
 \arguments{

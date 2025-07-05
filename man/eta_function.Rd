@@ -11,12 +11,12 @@ eta_function(alpha, Y_T, N, K)
 
 \item{Y_T}{Data}
 
-\item{N}{Number of underlying Regimes}
+\item{N}{Number of underlying regimes}
 
-\item{K}{Lag order of the AR-Model}
+\item{K}{Lag-order of the AR model}
 }
 \value{
-The eta-vector, defined as in Hamilton(1994) p.691 is computed
+The eta-vector, defined as in Hamilton (1994, page 691) is computed
 }
 \description{
 Title
