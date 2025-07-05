@@ -15,7 +15,7 @@
 #' @examples Example4_Beta_F_function(Y_T,alpha,P,Switcher = Switcher,N,K,m)
 Example4_Beta_F_function = function(Y_T,alpha,P,Switcher = Switcher,N,K,m){
   if(sum(!(Switcher[-(K+2)])) > 0){
-    zeta_YT = zeta_YT_function(alpha,P,Y_T,N,K)
+    zeta_YT = zeta_YT_function(alpha,P,Y_T,N,K) #smoothed inference over the regimes
     T = length(Y_T)
     X = matrix(0,ncol = K+1,nrow = T-K-K)
 
@@ -23,7 +23,7 @@ Example4_Beta_F_function = function(Y_T,alpha,P,Switcher = Switcher,N,K,m){
 
     X[,1] = rep(1,T-K-K)
     for(k in 1:K){
-      X[,k+1] = Y_T[(K+K+1-k):(T-k)]
+      X[,k+1] = Y_T[(K+K+1-k):(T-k)] #Creating the Lags of the time series
     }
 
     coef_Switcher = Switcher[-(K+2)]
@@ -31,9 +31,11 @@ Example4_Beta_F_function = function(Y_T,alpha,P,Switcher = Switcher,N,K,m){
     X_F = as.matrix(X[,!coef_Switcher])
     X_S = as.matrix(X[, coef_Switcher])
 
-    F_count = sum(coef_Switcher == FALSE)
-    S_count = sum(coef_Switcher == TRUE)
+    F_count = sum(coef_Switcher == FALSE) #Number of fixed parameters
+    S_count = sum(coef_Switcher == TRUE) #Number of switching parameters
 
+
+    #create the divisor matrix as in Müller (2025, page 21) for beta_F
     start_matrix = matrix(0,nrow = F_count,ncol = F_count)
     for(t in (m+1):(T-K-K)){
       xF_t = X_F[t,]
@@ -43,6 +45,7 @@ Example4_Beta_F_function = function(Y_T,alpha,P,Switcher = Switcher,N,K,m){
     divisor_matrix = start_matrix
 
 
+    #creates the second part of the formula for beta_F
     start_vector = matrix(0,ncol = 1,nrow = F_count)
     for(t in (m+1):(T-K-K)){
       for(j in 1:N){
@@ -58,7 +61,7 @@ Example4_Beta_F_function = function(Y_T,alpha,P,Switcher = Switcher,N,K,m){
     }
     upper_vector = start_vector
 
-    Beta_F = solve(divisor_matrix)%*%upper_vector
+    Beta_F = solve(divisor_matrix)%*%upper_vector #compute the total beta_F vector
     return(Beta_F)
   }else{
     return(c(0))
