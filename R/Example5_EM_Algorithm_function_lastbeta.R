@@ -1,19 +1,22 @@
 
-#' Title
-#'
+
+#' Example5_EM_Algorithm_function_lastbeta
+#' Example5_EM_Algorithm_function_lastbeta allows its user to implement the EM algorithm for estimating the parameters in Example 5 setups, see Müller (2025, page 21-24)
 #' @param Y_T Data
-#' @param K Lag order of the AR-Model
-#' @param N Number of underlying Regimes
-#' @param m Number of observations to condition on
-#' @param threshold Threshold for assigning the underlying regime based on the estimated probability
-#' @param max Number of iterations to go through
-#' @param R Number of random starting points
-#' @param Crit Performance Metric to use for choosing the optimisation result
+#' @param K Lag-order of the AR model
+#' @param N Number of underlying regimes
+#' @param m Number of time periods the conditional likelihood conditions on
+#' @param threshold Threshold for assigning the predicted regimes
+#' @param max Number of iterations of the EM algorithm
+#' @param R Number of random starting points for the EM algorithm
+#' @param Crit Performance metric for selecting one of the optima
+#' @param all.plot Whether plots from a optimisation attempts should be printed
+#' @param Switcher Switching vector indicating for all parameters whether they switch or not
 #'
-#' @return This function brings, for Example 5 setups (Subset of the coefficient switches, error term variance switches), everything together and runs the EM-Algorithm
+#' @return
 #' @export
 #'
-#' @examples Example5_EM_Algorithm_function_lastbeta(Y_T,K,N,m,threshold = 0.5,max = 500,R = 15, Crit = "LV",m)
+#' @examples Example5_EM_Algorithm_function_lastbeta(Y_T,K,N,m,threshold = 0.5,max = 500,R = 15, Crit = "LV", all.plot = FALSE, Switcher)
 Example5_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max = 500,R = 15, Crit = "LV", all.plot = FALSE, Switcher){
   Output_list = as.list(1:R)
   T = length(Y_T)
@@ -24,10 +27,11 @@ Example5_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max
   for(r in 1:R){
 
 
-    zetahat_1_0 = zeta_1_0_function(Y_T,N,K)
-    alpha_0 = alpha_0_function(Y_T,N,K)
-    P_0 = P_0_function(Y_T,N,K)
+    zetahat_1_0 = zeta_1_0_function(Y_T,N,K) #random starting point for the EM algorithm
+    alpha_0 = alpha_0_function(Y_T,N,K) #random starting point for the EM algorithm
+    P_0 = P_0_function(Y_T,N,K) #random starting point for the EM algorithm
 
+    #Begin the EM algorithm
     counter = 1
     P_Sammler = as.list(1:(max+1))
     alpha_Sammler = as.list(1:(max+1))
@@ -35,28 +39,29 @@ Example5_EM_Algorithm_function_lastbeta = function(Y_T,K,N,m,threshold = 0.5,max
     alpha_Sammler[[1]] = alpha_0
     while(counter <= max){
 
-      P_Sammler[[counter+1]] = P_ij_next_function(alpha_Sammler[[counter]],P_Sammler[[counter]],Y_T,N,K,m)
-      alpha_Sammler[[counter+1]] = Example5_alpha_next_function_lastbeta(Y_T,alpha_Sammler[[counter]],P_Sammler[[counter]],Switcher,N,K,m)
-      Log_value_l = Log_Likelihood_function(alpha_Sammler[[ifelse(counter-1>=1,counter-1,1)]],P_Sammler[[ifelse(counter-1>=1,counter-1,  1)]],Y_T,N,K)
-      Log_value_n = Log_Likelihood_function(alpha_Sammler[[counter]],P_Sammler[[counter]],Y_T,N,K)
+      P_Sammler[[counter+1]] = P_ij_next_function(alpha_Sammler[[counter]],P_Sammler[[counter]],Y_T,N,K,m) #Compute the P matrix for the next iteration
+      alpha_Sammler[[counter+1]] = Example5_alpha_next_function_lastbeta(Y_T,alpha_Sammler[[counter]],P_Sammler[[counter]],Switcher,N,K,m) #Compute the alpha matrix for the next iteration
+      Log_value_l = Log_Likelihood_function(alpha_Sammler[[ifelse(counter-1>=1,counter-1,1)]],P_Sammler[[ifelse(counter-1>=1,counter-1,  1)]],Y_T,N,K) #Compute the value of the log-likelihood from the last iteration
+      Log_value_n = Log_Likelihood_function(alpha_Sammler[[counter]],P_Sammler[[counter]],Y_T,N,K) #Compute the value from the log-likelihood for the current iteration
 
-      Delta = abs(Log_value_n - Log_value_l)
+      Delta = abs(Log_value_n - Log_value_l) #Change in log-likelihood value
 
       # if(Delta <= 0.00001){
-      #   max = counter - 1
+      #   max = counter - 1 #Several attempts demonstrated that choosing an apriori number of iterations for the EM algorithm leads to better results than setting a minimum change in the log-likelihood value, still this approach might be reimplemented in future MSARM updates
       #   break
       # }
 
       counter = counter + 1
     }
-    Log_value = Log_Likelihood_function(alpha_Sammler[[counter]],P_Sammler[[counter]],Y_T,N,K)
+    Log_value = Log_Likelihood_function(alpha_Sammler[[counter]],P_Sammler[[counter]],Y_T,N,K) #compute the value of the log-likelihood for the final parameter estimates
 
 
 
 
 
-    zetaout = zeta_YT_function(alpha_Sammler[[max+1]],P_Sammler[[max+1]],Y_T,N,K)[,-(1:(K))]
-    zetaout_ts = ts(zetaout[1,]) #1 oder 2 wählen je nachdem, wie das Modell die Regime zuordnet
+    zetaout = zeta_YT_function(alpha_Sammler[[max+1]],P_Sammler[[max+1]],Y_T,N,K)[,-(1:(K))] #smoothed inference over the regimes
+    zetaout_ts = ts(zetaout[1,])
+    #plot if all.plot = TRUE
 if(all.plot == TRUE){
     time_vals = time(zetaout_ts)
     plot(zetaout_ts, type = "l", col = "blue", lwd = 2,
@@ -74,12 +79,15 @@ if(all.plot == TRUE){
     years = floor(time(zetaout_ts))
 
     zetaout_ts_M = ts(t(zetaout))
+    #plot if all.plot = TRUE
 if(all.plot == TRUE){
     plot(zetaout_ts_M,plot.type = "single", col = c(1:N), lwd = 2)
     plot(zetaout_ts_M, col = c(1:N), lwd = 2)
 }
-    Predicted_Regime = apply(zetaout_ts_M,1,function(row){which(row == max(row))})
 
+    Predicted_Regime = apply(zetaout_ts_M,1,function(row){which(row == max(row))}) #Assignes the predicted regimes based on the threshold and the smoothed inference regarding the regimes
+
+    #Creates the in-sample fit of the time series
     Yhat_insample = rep(0,T-K)
     for(t in 1:(T-K)){
       for(j in 1:N){
@@ -108,20 +116,24 @@ if(all.plot == TRUE){
     legend("bottomleft",fill = c("black","blue","red"),legend = c("Actual Time Series","In Sample Fit","Predicted Regime"))
 }
 
+    #computes the RSS as performance metric measuring the quality of the in-sample fit
     RSS = sum((Y_T[-(1:K)] - ts(Yhat_insample))^2)
     residuals = Y_T[-(1:K)] - Yhat_insample
 
+    #Computes the RCM value
     RCM = 100*(N^2)*mean(apply(zetaout,2,prod))
 
 
-    Persistency = prod(diag(P_Sammler[[max+1]]))
+    Persistency = prod(diag(P_Sammler[[max+1]])) #Several experiments showed that this performance metric does not lead to better results, but it might be reimplemented in an adjusted way in future MSARM updates
 
+    #Computes the Entropy value
     Entropy = 100*(N^2)*(-1)*mean(apply(zetaout,2,function(col){
       phat = col[1]
       return(phat*log(phat))
     }))
     Entropy = Entropy
 
+    #Save the results
     output = list(P = P_Sammler[[max+1]],
                   alpha = alpha_Sammler[[max+1]],
                   zeta_t_T = zetaout,
@@ -144,6 +156,7 @@ if(all.plot == TRUE){
     RCM_list[[r]] = output$RCM
     Entropy_list[[r]] = output$Entropy
   }
+  #Print the results and plots for the optimum selected by LV
   if(Crit == "LV"){
     output = Output_list[[which.max(LV_list)]]
     P = output$P
@@ -216,6 +229,7 @@ if(all.plot == TRUE){
     legend_colors <- c("black", "blue", regime_colors)
     legend("bottomleft", fill = legend_colors, legend = legend_labels)
   }else{
+    #Print the results and plots for the optimum selected by RSS
     if(Crit == "RSS"){
       output = Output_list[[which.min(RSS_list)]]
       P = output$P
@@ -281,6 +295,7 @@ if(all.plot == TRUE){
       legend_colors <- c("black", "blue", regime_colors)
       legend("bottomleft", fill = legend_colors, legend = legend_labels)
     }else{
+      #Print the results and plots for the optimum selected by RCM
       if(Crit == "RCM"){
         output = Output_list[[which.min(RCM_list)]]
         P = output$P
@@ -346,6 +361,7 @@ if(all.plot == TRUE){
         legend_colors <- c("black", "blue", regime_colors)
         legend("bottomleft", fill = legend_colors, legend = legend_labels)
       }else{
+        #Print the results and plots for the optimum selected by Entropy
         if(Crit == "Entropy"){
           output = Output_list[[which.min(Entropy_list)]]
           P = output$P
