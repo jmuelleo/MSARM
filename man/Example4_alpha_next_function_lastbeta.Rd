@@ -2,29 +2,30 @@
 % Please edit documentation in R/Example4_alpha_next_function_lastbeta.R
 \name{Example4_alpha_next_function_lastbeta}
 \alias{Example4_alpha_next_function_lastbeta}
-\title{Title}
+\title{Example4_alpha_next_function_lastbeta
+Example4_alpha_next_function_lastbeta allows its user to estimate the alpha matrix of the next iteration for Example 4 setups, based on Müller (2025, page 19-21)}
 \usage{
 Example4_alpha_next_function_lastbeta(Y_T, alpha, P, Switcher, N, K, m)
 }
 \arguments{
 \item{Y_T}{Data}
 
-\item{alpha}{alpha vector (intercept, coefficients and error variance) from the last iteration}
+\item{alpha}{alpha matrix from the last iteration}
 
-\item{P}{Transpose of the transition matrix Pi}
+\item{P}{P matrix from the last iteration}
 
-\item{Switcher}{Switching-vector, a vector of (TRUE/FALSE) of the length K+2, which indicates which parameters are supposed to switch}
+\item{Switcher}{Switching vector which indicates which parameter switch}
 
-\item{N}{Number of underlying Regimes}
+\item{N}{Number of underlying regimes}
 
-\item{K}{Lag order of the AR-Model}
-}
-\value{
-Computes, for Example 4 setups (Subset of the coefficients switches, error term variance is fixed) the alpha of the next iteration, based on the results from the last iteration
+\item{K}{Lag-order of the AR model}
+
+\item{m}{Number of time periods the conditional log-likelihood conditions on}
 }
 \description{
-Title
+Example4_alpha_next_function_lastbeta
+Example4_alpha_next_function_lastbeta allows its user to estimate the alpha matrix of the next iteration for Example 4 setups, based on Müller (2025, page 19-21)
 }
 \examples{
-Example4_alpha_next_function_lastbeta(Y_T,alpha,P,Switcher,N,K)
+Example4_alpha_next_function_lastbeta(Y_T,alpha,P,Switcher,N,K,m)
 }

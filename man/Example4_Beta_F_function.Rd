@@ -2,26 +2,30 @@
 % Please edit documentation in R/Example4_Beta_F_function.R
 \name{Example4_Beta_F_function}
 \alias{Example4_Beta_F_function}
-\title{Title}
+\title{Example4_Beta_F_function
+Example4_Beta_F_function allows its user to estimate the fixed coefficients vector called beta_F, based on the results from the previous iteration and the formulas in Müller (2025, page 21)}
 \usage{
 Example4_Beta_F_function(Y_T, alpha, P, Switcher = Switcher, N, K, m)
 }
 \arguments{
 \item{Y_T}{Data}
 
-\item{alpha}{alpha vector (intercept, coefficients and error variance) from the last iteration}
+\item{alpha}{alpha matrix from the previous iteration}
 
-\item{P}{Transpose of the transition matrix Pi}
+\item{P}{P matrix from the previous iteration}
 
-\item{Switcher}{Switching-vector, a vector of (TRUE/FALSE) of the length K+2, which indicates which parameters are supposed to switch}
+\item{Switcher}{Switching vector indicating which parameters switch}
 
-\item{N}{Number of underlying Regimes}
+\item{N}{Number of underlying regimes}
 
-\item{K}{Lag order of the AR-Model}
+\item{K}{Lag-order of the AR model}
+
+\item{m}{Number of time periods the conditional log-likelihood conditions on}
 }
 \description{
-Title
+Example4_Beta_F_function
+Example4_Beta_F_function allows its user to estimate the fixed coefficients vector called beta_F, based on the results from the previous iteration and the formulas in Müller (2025, page 21)
 }
 \examples{
-Example4_Beta_F_function(Y_T,alpha,P,Switcher = Switcher,N,K)
+Example4_Beta_F_function(Y_T,alpha,P,Switcher = Switcher,N,K,m)
 }

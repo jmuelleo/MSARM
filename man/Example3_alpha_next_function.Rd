@@ -2,7 +2,8 @@
 % Please edit documentation in R/Example3_alpha_next_function.R
 \name{Example3_alpha_next_function}
 \alias{Example3_alpha_next_function}
-\title{Title}
+\title{Example3_alpha_next_function
+The next alpha for Example 3 setups (all parameters switch) is computed as part of the EM algorithm}
 \usage{
 Example3_alpha_next_function(alpha, P, Y_T, N, K, m)
 }
@@ -19,11 +20,9 @@ Example3_alpha_next_function(alpha, P, Y_T, N, K, m)
 
 \item{m}{Number of time periods the conditional likelihood conditions on}
 }
-\value{
-The next alpha for Example 3 setups (all parameters switch) is computed as part of the EM algorithm
-}
 \description{
-Title
+Example3_alpha_next_function
+The next alpha for Example 3 setups (all parameters switch) is computed as part of the EM algorithm
 }
 \examples{
 Example3_alpha_next_function(alpha,P,Y_T,N,K,m)
