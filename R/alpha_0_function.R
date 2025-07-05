@@ -1,5 +1,5 @@
 
-#' alpha_0_function
+#' Title
 #'
 #' @param Y_T Data
 #' @param N Number of underlying regimes
