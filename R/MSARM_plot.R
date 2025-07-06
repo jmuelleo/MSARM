@@ -1,6 +1,6 @@
 
-#' MSARM.plot
-#'
+#' @title MSARM.plot
+#' @description MSARM.plot creates forecast plots for MSARM.fit results
 #' @param res_MSARM.predict An object saving the results from MSARM.predict
 #' @param conf Set to TRUE if MSARM.predict was implemented with the option boot = TRUE, then bootstrap confidence intervals are plotted
 #' @param start Start of the time series (format as in in the window() command), therefore (year,quarter) for quarterly data for example

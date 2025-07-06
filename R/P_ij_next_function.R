@@ -1,6 +1,6 @@
 
-#' P_ij_next_function
-#' P_ij_next_function allows its user to estimate the P matrix of the next iteration as part of the EM algorithm, as described in Hamilton (1994, page 695)
+#' @title P_ij_next_function
+#' @description P_ij_next_function allows its user to estimate the P matrix of the next iteration as part of the EM algorithm, as described in Hamilton (1994, page 695)
 #' @param alpha alpha matrix of the last iteration
 #' @param P P matrix of the last iteration
 #' @param Y_T Data

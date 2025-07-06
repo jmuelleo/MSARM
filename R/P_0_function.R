@@ -1,6 +1,6 @@
 
-#' P_0_function
-#' P_0_function creates P_0 as part of a random starting point for the EM algorithm
+#' @title P_0_function
+#' @description P_0_function creates P_0 as part of a random starting point for the EM algorithm
 #' @param Y_T Data
 #' @param N Number of underlying regimes
 #' @param K Lag-order of the AR model

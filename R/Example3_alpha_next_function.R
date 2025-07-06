@@ -1,6 +1,6 @@
 
-#' Example3_alpha_next_function
-#' The next alpha for Example 3 setups (all parameters switch) is computed as part of the EM algorithm
+#' @title Example3_alpha_next_function
+#' @description The next alpha for Example 3 setups (all parameters switch) is computed as part of the EM algorithm
 #' @param alpha alpha vector (intercept, coefficients and error variance) from the last iteration
 #' @param P transpose of the transition matrix (of the Markov-Chain) from the last iteration
 #' @param Y_T Data

@@ -1,6 +1,6 @@
 
-#' Example4_EM_Algorithm_function_lastbeta
-#' Example4_EM_Algorithm_function_lastbeta allows its user to run the EM algorithm for estimating the parameters of a Markov-Switching AR model of the form of Example 4, see Müller (2025, page 19-21)
+#' @title Example4_EM_Algorithm_function_lastbeta
+#' @description Example4_EM_Algorithm_function_lastbeta allows its user to run the EM algorithm for estimating the parameters of a Markov-Switching AR model of the form of Example 4, see Müller (2025, page 19-21)
 #' @param Y_T Data
 #' @param K Lag-order of the AR model
 #' @param N Number of underlying regimes

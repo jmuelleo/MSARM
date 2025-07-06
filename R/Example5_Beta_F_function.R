@@ -1,6 +1,6 @@
 
-#' Example5_Beta_F_function
-#' Example5_Beta_F_function allows its user to compute beta_F as part of the EM algorithm for Example 5 setups, for details see Müller (2025, page 23-24)
+#' @title Example5_Beta_F_function
+#' @description Example5_Beta_F_function allows its user to compute beta_F as part of the EM algorithm for Example 5 setups, for details see Müller (2025, page 23-24)
 #' @param Y_T Data
 #' @param alpha alpha matrix from the previous iteration
 #' @param P P matrix from the previous iteration

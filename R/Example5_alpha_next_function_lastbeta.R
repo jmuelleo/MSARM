@@ -1,6 +1,6 @@
 
-#' Example5_alpha_next_function_lastbeta
-#' Example5_alpha_next_function_lastbeta allows its user to estimate the alpha matrix of the next iteration as part of the EM algorithm for setups of the form of Example 5. A more detailed explanation can be found in Müller (2025, page 21-24)
+#' @title Example5_alpha_next_function_lastbeta
+#' @description Example5_alpha_next_function_lastbeta allows its user to estimate the alpha matrix of the next iteration as part of the EM algorithm for setups of the form of Example 5. A more detailed explanation can be found in Müller (2025, page 21-24)
 #' @param Y_T Data
 #' @param alpha alpha matrix from the previous iteration
 #' @param P P matrix from the previous iteration

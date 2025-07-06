@@ -1,6 +1,6 @@
 
-#' Example4_Beta_F_function
-#' Example4_Beta_F_function allows its user to estimate the fixed coefficients vector called beta_F, based on the results from the previous iteration and the formulas in Müller (2025, page 21)
+#' @title Example4_Beta_F_function
+#' @description Example4_Beta_F_function allows its user to estimate the fixed coefficients vector called beta_F, based on the results from the previous iteration and the formulas in Müller (2025, page 21)
 #' @param Y_T Data
 #' @param alpha alpha matrix from the previous iteration
 #' @param P P matrix from the previous iteration

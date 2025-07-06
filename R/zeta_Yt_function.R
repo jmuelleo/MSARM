@@ -1,6 +1,6 @@
 
-#' zeta_Yt_function
-#' zeta_Yt_function allows its user to get optimal inference over the regimes as described in Hamilton (1994, page 692)
+#' @title zeta_Yt_function
+#' @description zeta_Yt_function allows its user to get optimal inference over the regimes as described in Hamilton (1994, page 692)
 #' @param alpha alpha matrix from the last iteration
 #' @param P P matrix from the last iteration
 #' @param Y_T Data

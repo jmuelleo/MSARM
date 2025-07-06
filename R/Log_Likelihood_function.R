@@ -1,6 +1,6 @@
 
-#' Log_Likelihood_function
-#' Log_Likelihood_function allows its user to compute the value of the log-likelihood function based on Hamilton (1994, page 692)
+#' @title Log_Likelihood_function
+#' @description Log_Likelihood_function allows its user to compute the value of the log-likelihood function based on Hamilton (1994, page 692)
 #' @param alpha alpha vector from the previous iteration
 #' @param P P matrix from the previous iteration
 #' @param Y_T Data

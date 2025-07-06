@@ -1,6 +1,6 @@
 
-#' alpha_0_function
-#' A random starting value of alpha is generated so that the EM algorithm can start
+#' @title alpha_0_function
+#' @description A random starting value of alpha is generated so that the EM algorithm can start
 #' @param Y_T Data
 #' @param N Number of underlying regimes
 #' @param K Lag-order of the AR model

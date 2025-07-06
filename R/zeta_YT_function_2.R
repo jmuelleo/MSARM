@@ -1,6 +1,6 @@
 
-#' zeta_YT_function
-#' zeta_YT_function allows its user to get smoothed inference over the regimes as described in Hamilton (1994, page 694)
+#' @title zeta_YT_function
+#' @description zeta_YT_function allows its user to get smoothed inference over the regimes as described in Hamilton (1994, page 694)
 #' @param alpha alpha matrix from the last iteration
 #' @param P P matrix from the last iteration
 #' @param Y_T Data

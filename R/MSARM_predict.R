@@ -1,6 +1,6 @@
 
-#' MSARM.predict
-#' MSARM.predict allows its user to make forecasts utilizing an earlier estimated Markov-Switching AR model, the underlying theory is described in Müller (2025, page 24)
+#' @title MSARM.predict
+#' @description MSARM.predict allows its user to make forecasts utilizing an earlier estimated Markov-Switching AR model, the underlying theory is described in Müller (2025, page 24)
 #' @param res_MSARM.fit An object containing the estimation results of MSARM.fit
 #' @param n.ahead Number of time periods to forecast ahead
 #' @param boot Whether bootstrap forecasts and bootstrap confidence intervals should be implemented instead of standard forecasts

@@ -1,5 +1,5 @@
-#' eta_function
-#' The eta-vector, defined as in Hamilton (1994, page 691) is computed
+#' @title eta_function
+#' @description The eta-vector, defined as in Hamilton (1994, page 691) is computed
 #' @param alpha alpha vector (intercept, coefficients and error variance) from the last iteration
 #' @param Y_T Data
 #' @param N Number of underlying regimes

@@ -1,6 +1,6 @@
 
-#' zeta_1_0_function
-#' zeta_1_0_function creates zeta_1_0 as part of the random starting point for the EM algorithm
+#' @title zeta_1_0_function
+#' @description zeta_1_0_function creates zeta_1_0 as part of the random starting point for the EM algorithm
 #' @param Y_T Data
 #' @param N Number of underlying regimes
 #' @param K Lag-order of the AR model

@@ -1,7 +1,7 @@
 
 
-#' Example5_EM_Algorithm_function_lastbeta
-#' Example5_EM_Algorithm_function_lastbeta allows its user to implement the EM algorithm for estimating the parameters in Example 5 setups, see Müller (2025, page 21-24)
+#' @title Example5_EM_Algorithm_function_lastbeta
+#' @description Example5_EM_Algorithm_function_lastbeta allows its user to implement the EM algorithm for estimating the parameters in Example 5 setups, see Müller (2025, page 21-24)
 #' @param Y_T Data
 #' @param K Lag-order of the AR model
 #' @param N Number of underlying regimes

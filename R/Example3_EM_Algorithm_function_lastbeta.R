@@ -1,6 +1,6 @@
 
-#' Example3_EM_Algorithm_function_lastbeta
-#' Example3_EM_Algorithm_function_lastbeta allows its user to apply the EM algorithm for estimating Markov-Switching models of the form of Example 3 (All Switching), as described in Müller (2025, page 18-19)
+#' @title Example3_EM_Algorithm_function_lastbeta
+#' @description Example3_EM_Algorithm_function_lastbeta allows its user to apply the EM algorithm for estimating Markov-Switching models of the form of Example 3 (All Switching), as described in Müller (2025, page 18-19)
 #' @param Y_T Data
 #' @param K Lag-order of the AR model
 #' @param N Number of underlying regimes

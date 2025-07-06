@@ -1,6 +1,6 @@
 
-#' MSARM.fit
-#' MSARM.fit allows its user to estimate Markov-Switching AR models, as they are described in Hamilton (1994, page 690-698). Thereby an arbitrary set of parameters
+#' @title MSARM.fit
+#' @description MSARM.fit allows its user to estimate Markov-Switching AR models, as they are described in Hamilton (1994, page 690-698). Thereby an arbitrary set of parameters
 #' is allowed to switch. The estimation process strongly orients itself on the EM algorithm described in Hamilton (1990) and is described in more detail in Müller (2025, page 7-21).
 #' @param Y_T Data (The full time series that is to be analyzed)
 #' @param K Lag-order of the AR model

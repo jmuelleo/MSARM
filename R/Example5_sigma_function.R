@@ -1,6 +1,6 @@
 
-#' Example5_sigma_function
-#' Example5_sigma_function allows its user to esimate the error term standard deviation for Example 5 setups, based on the results from previous iterations and the formula presented in Müller (2025, page 24)
+#' @title Example5_sigma_function
+#' @description Example5_sigma_function allows its user to esimate the error term standard deviation for Example 5 setups, based on the results from previous iterations and the formula presented in Müller (2025, page 24)
 #' @param Y_T Data
 #' @param alpha alpha matrix from the previous iteration
 #' @param P P matrix from the previous iteration

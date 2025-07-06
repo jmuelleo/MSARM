@@ -1,6 +1,6 @@
 
-#' Example4_alpha_next_function_lastbeta
-#' Example4_alpha_next_function_lastbeta allows its user to estimate the alpha matrix of the next iteration for Example 4 setups, based on Müller (2025, page 19-21)
+#' @title Example4_alpha_next_function_lastbeta
+#' @description Example4_alpha_next_function_lastbeta allows its user to estimate the alpha matrix of the next iteration for Example 4 setups, based on Müller (2025, page 19-21)
 #' @param Y_T Data
 #' @param alpha alpha matrix from the last iteration
 #' @param P P matrix from the last iteration
