@@ -12,7 +12,7 @@
 eta_function = function(alpha,Y_T,N,K){
   T = length(Y_T)
   eta = matrix(5,ncol = T,nrow = N)
-  for(t in (K+1):T){ #presample data is necessary, therefore + K -> (total time series has the length T = l + K, core time series has the length l)
+  for(t in (K+1):T){  #presample data is necessary, therefore + K -> (total time series has the length T = l + K, core time series has the length l)
     for(h in 1:N){
       eta[h,t] = dnorm(Y_T[t], #follows the eta-vector has defined in Hamilton (1994, page 691)
                        mean = c(1,Y_T[(t-1):(t-K)])%*%alpha[h,-(K+2)],
