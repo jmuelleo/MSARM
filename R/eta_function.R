@@ -1,11 +1,11 @@
-#' Title
-#'
+#' eta_function
+#' The eta-vector, defined as in Hamilton (1994, page 691) is computed
 #' @param alpha alpha vector (intercept, coefficients and error variance) from the last iteration
 #' @param Y_T Data
 #' @param N Number of underlying regimes
 #' @param K Lag-order of the AR model
 #'
-#' @return The eta-vector, defined as in Hamilton (1994, page 691) is computed
+#' @return
 #' @export
 #'
 #' @examples eta_function(alpha,Y_T,N,K)
