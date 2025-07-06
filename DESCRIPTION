@@ -1,11 +1,19 @@
 Package: MSARM
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Title: Estimation of Markov-Switching AR Models with Parameter Switching
+Version: 1.0.0
+Authors@R: person("Julian Herbert", "Müller", 
+                  email = "julian.mueller5353@gmail.com", 
+                  role = c("aut", "cre"))
+Description: The MSARM package provides tools to estimate Markov-Switching AR models 
+  with arbitrary parameter switching using the EM algorithm. The core functions include 
+  'MSARM.fit' for estimation, 'MSARM.predict' for forecasting, and 'MSARM.plot' for 
+  visualization. The implementation closely follows the theory of Hamilton (1990, 1994) 
+  and the methods described in Müller (2025), "From Theory to Application: Developing MSARM".
+  Only AR models are currently supported. ADL, VAR, or VECM models are not implemented.
+  Users can customize EM settings, including iteration count, number of random starting points,
+  and the selection criterion. The package also provides regime probabilities, in-sample fits,
+  and supports bootstrap forecasts with confidence intervals.
+License: MIT
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
