@@ -1,26 +1,27 @@
+
 #' MSARM.predict
+#' MSARM.predict allows its user to make forecasts utilizing an earlier estimated Markov-Switching AR model, the underlying theory is described in Müller (2025, page 24)
+#' @param res_MSARM.fit An object containing the estimation results of MSARM.fit
+#' @param n.ahead Number of time periods to forecast ahead
+#' @param boot Whether bootstrap forecasts and bootstrap confidence intervals should be implemented instead of standard forecasts
+#' @param levels The levels of the boostrap confidence intervals, if boot is set to TRUE
+#' @param L Number of boostrap estimations computed
 #'
-#' @param res_MSARM.fit Result of an MSARM.fit estimation
-#' @param n.ahead Number of periods to be forecasted ahead
-#' @param boot Whether bootstrapping shall be utilized (allows for creating confidence intervals)
-#' @param levels If bootstrapped, the levels for the confidence intervals
-#' @param L If bootstrapped the number of bootstrap estimates
-#'
-#' @return MSARM.predict allows its user to predict an MSARM.fit output for n.ahead periods ahead. Furthermore confidence intervals can be created by setting
-#' boot = TRUE, in that case L bootstrap estimates and intervals will be created.
+#' @return
 #' @export
 #'
-#' @examples MSARM.predict(res_MSARM.fit, n.ahead, boot = FALSE, levels = c(0.95,0.9,0.8,0.7,0.6), L = 10000)
+#' @examples MSARM.predict(res_MSARM.fit, n.ahead = 4) would give for a quarterly time series the forecast for the next year.
 MSARM.predict = function(res_MSARM.fit, n.ahead = 1, boot = FALSE, levels = c(0.95,0.9,0.8,0.7,0.6), L = 10000){
 
   N = dim(res_MSARM.fit$P)[1]
-  zeta_t_T_1 = res_MSARM.fit$zeta_t_T
+  zeta_t_T_1 = res_MSARM.fit$zeta_t_T #smoothed inference over the regimes
   n = length(zeta_t_T_1[1,])
   zeta_T_T_1 = zeta_t_T_1[,n]
 
-  P = res_MSARM.fit$P
+  P = res_MSARM.fit$P #P matrix
 
 
+  #create the m-step ahead transition matrix
   Rhat = matrix(0,nrow = N, ncol = n.ahead)
   Rhat[,1] = P%*%zeta_T_T_1
   if(n.ahead > 1){
@@ -34,11 +35,12 @@ MSARM.predict = function(res_MSARM.fit, n.ahead = 1, boot = FALSE, levels = c(0.
 }
 
 
-  alpha = res_MSARM.fit$alpha
+  alpha = res_MSARM.fit$alpha #alpha matrix
   K = length(alpha[1,])-2
-  coef_res = alpha[,-(K+2)]
-  Y_T = res_MSARM.fit$Y_T
+  coef_res = alpha[,-(K+2)] #estimated coefficients
+  Y_T = res_MSARM.fit$Y_T #original time series
 
+  #Create one-step ahead forecast
   fcast = rep(0,n.ahead)
   Y = c(Y_T)
   n = length(Y)
@@ -48,19 +50,21 @@ MSARM.predict = function(res_MSARM.fit, n.ahead = 1, boot = FALSE, levels = c(0.
   }
   fcast[1] = t(h)%*%Rhat[,1]
 
+  #If more than one-step ahead forecasts are implemented:
   if(n.ahead > 1){
   for(m in 2:n.ahead){
     Y = c(Y_T,fcast[1:(m-1)])
     n = length(Y)
     h = rep(0,N)
     for(i in 1:N){
-      h[i] = c(1,Y[n:(n-K+1)])%*%coef_res[i,]
+      h[i] = c(1,Y[n:(n-K+1)])%*%coef_res[i,] #m-step ahead conditional forecast
     }
-    fcast[m] = t(h)%*%Rhat[,m]
+    fcast[m] = t(h)%*%Rhat[,m] #create m-step ahead forecast
   }
 }
 
 
+  #save results
   output = list(zeta_hat = Rhat,
                 fcast = fcast,
                 Y_T = Y_T,
@@ -68,9 +72,10 @@ MSARM.predict = function(res_MSARM.fit, n.ahead = 1, boot = FALSE, levels = c(0.
 
 
 
-  residuals = res_MSARM.fit$residuals
+  residuals = res_MSARM.fit$residuals #in-sample residuals
 
 
+  #run bootstrap algorithm as described in Müller (2025, page 28) if boot is set to TRUE
   if(boot == TRUE){
 
     fcast_boot = matrix(0,nrow = n.ahead, ncol = L)
@@ -81,7 +86,7 @@ MSARM.predict = function(res_MSARM.fit, n.ahead = 1, boot = FALSE, levels = c(0.
       for(i in 1:N){
         h[i] = c(1,Y[n:(n-K+1)])%*%coef_res[i,]
       }
-      fcast_boot[1,l] = t(h)%*%Rhat[,1] + sample(residuals,1)
+      fcast_boot[1,l] = t(h)%*%Rhat[,1] + sample(residuals,1) #one-step ahead forecast
 
       if(n.ahead > 1){
       for(m in 2:n.ahead){
@@ -91,10 +96,11 @@ MSARM.predict = function(res_MSARM.fit, n.ahead = 1, boot = FALSE, levels = c(0.
         for(i in 1:N){
           h[i] = c(1,Y[n:(n-K+1)])%*%coef_res[i,] + sample(residuals,1)
         }
-        fcast_boot[m,l] = t(h)%*%Rhat[,m]
+        fcast_boot[m,l] = t(h)%*%Rhat[,m] #m-step ahead forecasts
       }}
     }
 
+    #create a suitable results matrix
     quantile_vector = c((1-levels)/2,rev(levels+(1-levels)/2))
     res_boot = matrix(0,nrow = n.ahead,ncol = (length(levels)*2)+1)
     colnames(res_boot) = c("fcast_boot",quantile_vector)
@@ -107,6 +113,7 @@ MSARM.predict = function(res_MSARM.fit, n.ahead = 1, boot = FALSE, levels = c(0.
       }
     }
 
+    #save results
     output = list(zeta_hat = Rhat,
                   fcast = fcast,
                   fcast_boot = res_boot,
