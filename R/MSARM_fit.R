@@ -13,7 +13,10 @@
 #' @param Crit_value Performance metric for choosing between the different optima. It is advised to run the function ones with "LV" and once with "RCM", if both estimation approaches lead to vastly different results a third run with Entropy can help to decide.
 #' @param all.plot Whether plots from all optimisation attempts should be printed
 #'
-#' @return
+#' @return Returns a list object containing the estimation results regarding the Markov-Switching AR model. The output includes
+#' the estimate of the P matrix, the estimate of the alpha matrix, the smoothed inference regarding the regines, the value of the log-likelihood function
+#' the computed RSS value, the computed RCM value and the computed Entropy value. Furthermore the list contains the original time series, the in-sample fit and the residuals.
+#'
 #' @export
 #'
 #' @examples MSARM.fit(Y_T,K,N,Switcher) would be the standard implementation of MSARM.fit

@@ -9,7 +9,7 @@
 #' @param K Lag-order of the AR model
 #' @param m Number of time periods the conditional log-likelihood conditions on
 #'
-#' @return
+#' @return Returns a vector representing beta_F based on the results from the last iteration
 #' @export
 #'
 #' @examples Example4_Beta_F_function(Y_T,alpha,P,Switcher = Switcher,N,K,m)

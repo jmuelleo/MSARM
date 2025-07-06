@@ -5,7 +5,7 @@
 #' @param N Number of underlying regimes
 #' @param K Lag-order of the AR model
 #'
-#' @return
+#' @return Returns a matrix of the dimensions (N x N)
 #' @export
 #'
 #' @examples P_0_function(Y_T,N,K)

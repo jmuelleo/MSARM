@@ -7,7 +7,7 @@
 #' @param N Number of underlying regimes
 #' @param K Lag-order of the AR model
 #'
-#' @return
+#' @return Returns the value of the log-likelihood function at a specific theta
 #' @export
 #'
 #' @examples Log_Likelihood_function(alpha,P,Y_T,N,K)

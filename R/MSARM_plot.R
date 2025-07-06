@@ -6,7 +6,7 @@
 #' @param start Start of the time series (format as in in the window() command), therefore (year,quarter) for quarterly data for example
 #' @param freq Frequency of the data, i.e. 4 for quarterly, 12 for monthly data.
 #'
-#' @return
+#' @return Returns forecast plots
 #' @export
 #'
 #' @examples MSARM.plot(res_MSARM.predict, start = c(1967,1), freq = 4) would give a standard forecast plot with the original data starting in 1967, first quarter

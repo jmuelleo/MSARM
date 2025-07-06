@@ -5,7 +5,7 @@
 #' @param N Number of underlying regimes
 #' @param K Lag-order of the AR model
 #'
-#' @return
+#' @return returns a matrix of the dimensions (T x N) containing the values of the conditional density function
 #' @export
 #'
 #' @examples eta_function(alpha,Y_T,N,K)

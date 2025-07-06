@@ -7,7 +7,8 @@
 #' @param levels The levels of the boostrap confidence intervals, if boot is set to TRUE
 #' @param L Number of boostrap estimations computed
 #'
-#' @return
+#' @return Returns a list object containg the results of the forecasts based on the estimated Markov-Switching model. The list object contains
+#' the predicted future regime chance, the forecasts, the original time series and the number of time periods forecasted ahead. If boot is set to true, then also bootstrap confidence intervals are given.
 #' @export
 #'
 #' @examples MSARM.predict(res_MSARM.fit, n.ahead = 4) would give for a quarterly time series the forecast for the next year.
@@ -21,7 +22,7 @@ MSARM.predict = function(res_MSARM.fit, n.ahead = 1, boot = FALSE, levels = c(0.
   P = res_MSARM.fit$P #P matrix
 
 
-  #create the m-step ahead transition matrix
+  #create the m-step ahead predicted regime chance
   Rhat = matrix(0,nrow = N, ncol = n.ahead)
   Rhat[,1] = P%*%zeta_T_T_1
   if(n.ahead > 1){

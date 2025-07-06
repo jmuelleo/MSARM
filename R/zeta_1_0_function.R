@@ -5,7 +5,7 @@
 #' @param N Number of underlying regimes
 #' @param K Lag-order of the AR model
 #'
-#' @return
+#' @return Creates a vector representing the random starting point for the optimal inference over the regimes
 #' @export
 #'
 #' @examples zeta_1_0_function(Y_T,N,K)

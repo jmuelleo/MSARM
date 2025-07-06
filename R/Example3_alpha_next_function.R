@@ -8,7 +8,7 @@
 #' @param K Lag-order of the AR model
 #' @param m Number of time periods the conditional likelihood conditions on
 #'
-#' @return
+#' @return returns a matrix of the dimensions (N x K+2)
 #' @export
 #'
 #' @examples Example3_alpha_next_function(alpha,P,Y_T,N,K,m)

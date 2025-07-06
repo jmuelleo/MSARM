@@ -7,7 +7,7 @@
 #' @param N Number of underlying regimes
 #' @param K Lag-order of the AR model
 #'
-#' @return
+#' @return Returns the smoothed inference over the regimes
 #' @export
 #'
 #' @examples zeta_YT_function(alpha,P,Y_T,N,K)

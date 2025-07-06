@@ -5,10 +5,10 @@
 #' @param N Number of underlying regimes
 #' @param K Lag-order of the AR model
 #'
-#' @return
+#' @return Returns a matirx of the dimensions (N x K+2) containing randomly generated values for (intercept, coefficients, error term variance)
 #' @export
 #'
-#' @examples alpha_0_function = function(Y_T,N,K)
+#' @examples alpha_0_function(Y_T,N,K)
 #'
 alpha_0_function = function(Y_T,N,K){
   T = length(Y_T)

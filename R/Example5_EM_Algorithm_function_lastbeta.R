@@ -13,7 +13,7 @@
 #' @param all.plot Whether plots from a optimisation attempts should be printed
 #' @param Switcher Switching vector indicating for all parameters whether they switch or not
 #'
-#' @return
+#' @return Returns a list object containing the results from the EM algorithm estimation of the Markov-Switching model
 #' @export
 #'
 #' @examples Example5_EM_Algorithm_function_lastbeta(Y_T,K,N,m,threshold = 0.5,max = 500,R = 15, Crit = "LV", all.plot = FALSE, Switcher)

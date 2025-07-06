@@ -9,7 +9,7 @@
 #' @param K Lag-order of the AR model
 #' @param m Number of time periods the conditional likelihood conditions on
 #'
-#' @return
+#' @return Returns a vector representing the estimates for beta_F based on the results from the last iteration
 #' @export
 #'
 #' @examples
