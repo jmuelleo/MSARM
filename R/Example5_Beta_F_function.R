@@ -12,7 +12,7 @@
 #' @return Returns a vector representing the estimates for beta_F based on the results from the last iteration
 #' @export
 #'
-#' @examples
+#' @examples Example5_Beta_F_function(Y_T,alpha,P,Switcher,N,K,m)
 Example5_Beta_F_function = function(Y_T,alpha,P,Switcher,N,K,m){
   T = length(Y_T)
   zeta_YT = zeta_YT_function(alpha,P,Y_T,N,K) #smoothed inference regarding the regimes
