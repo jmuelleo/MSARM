@@ -1,8 +1,7 @@
 Package: MSARM
 Title: Estimate Markov-Switching AR models with arbitrary parameter switching, utilizing the EM algorithm.
 Version: 1.0
-Authors@R: 
-    person("Julian Herbert", "Müller", , "julian.mueller5353@gmail.com", role = c("aut", "cre"))
+Authors@R: Julian Herbert Müller, Email: julian.mueller5353@gmail.com
 Description: The MSARM package contains three main functions. Those are "MSARM.fit", "MSARM.predict", and "MSARM.plot". MSARM. fit allows 
 its user to estimate Markov-Switching AR models with arbitrary parameter switching utilizing the EM algorithm. The implementation closely follows the theory outlined by Hamilton (1990) and Hamilton (1994).
 More in-depth discussion of the implemented theory and approximations can be found in Müller (2025), "From Theory to Application:
@@ -11,8 +10,8 @@ Theoretical derivations for these broader and more complex classes of models exi
 that MSARM allows its user quite a lot of freedom regarding the number of iterations in the EM algorithm, the number of random starting points and the performance metric used to choose one of the resulting optima.
 Additionally, the user gets plots of the estimated regime probability, as well as plots of the in-sample fit. MSARM.predict allows the user to make forecasts regarding the time series, based on the estimated Markov-Switching AR model.
 Thereby, it is even possible to create bootstrap forecasts and bootstrap confidence intervals. Forecasts can be easily visualized using MSARM.plot.
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+
+License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a license
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
