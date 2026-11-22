@@ -2,8 +2,6 @@
 suppressPackageStartupMessages(library(MSwM))
 env <- new.env()
 invisible(lapply(list.files("R", full.names = TRUE), sys.source, envir = env))
-args <- commandArgs(trailingOnly = TRUE)
-replications <- if (length(args)) as.integer(args[1L]) else 16L
 
 scenarios <- list(
   intercept = list(k = 2L, n = 250L, sw = c(TRUE, FALSE, FALSE),
@@ -30,8 +28,13 @@ simulate <- function(s, seed) {
   state <- rep(1L, length(y))
   for (i in seq.int(order + 1L, length(y))) {
     j <- state[i] <- sample.int(s$k, 1L, prob = P[, state[i - 1L]])
+    innovation <- if (identical(s$innovation, "t3")) {
+      rt(1L, df = 3) / sqrt(3)
+    } else {
+      rnorm(1L) * if (identical(s$innovation, "outliers") && runif(1L) < .025) 8 else 1
+    }
     y[i] <- sum(c(1, y[i - seq_len(order)]) * s$beta[j, -ncol(s$beta)]) +
-      rnorm(1, sd = sqrt(s$beta[j, ncol(s$beta)]))
+      innovation * sqrt(s$beta[j, ncol(s$beta)])
   }
   list(y = tail(y, s$n), state = tail(state, s$n), P = P, order = order)
 }
@@ -91,10 +94,12 @@ fit_one <- function(package, data, s, seed, return_path = FALSE) {
   if (!return_path) result$path <- NULL
   c(list(package = package, seconds = proc.time()[["elapsed"]] - start), result)
 }
-selected <- if (length(args) >= 2L) args[2L] else names(scenarios)
-output <- if (length(args) >= 3L) args[3L] else "benchmarks/results.csv"
-offset <- if (length(args) >= 4L) as.integer(args[4L]) else 0L
 if (sys.nframe() == 0L) {
+  args <- commandArgs(trailingOnly = TRUE)
+  replications <- if (length(args)) as.integer(args[1L]) else 16L
+  selected <- if (length(args) >= 2L) args[2L] else names(scenarios)
+  output <- if (length(args) >= 3L) args[3L] else "benchmarks/results.csv"
+  offset <- if (length(args) >= 4L) as.integer(args[4L]) else 0L
   if (!all(selected %in% names(scenarios))) stop("Unknown scenario")
   rows <- list()
   for (name in selected) {

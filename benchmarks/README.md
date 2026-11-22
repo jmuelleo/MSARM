@@ -46,3 +46,5 @@ against the original MSARM commit used an AR(2) series of 250 observations,
 with R 4.5.2.
 
 [Extended regime recovery stress test](REGIME-STRESS.md)
+
+[Expanded 300-series regime recovery study](STRESS300.md)
