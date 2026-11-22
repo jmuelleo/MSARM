@@ -17,19 +17,21 @@ MSARM.predict(
 
 \item{n.ahead}{Number of time periods to forecast ahead}
 
-\item{boot}{Whether bootstrap forecasts and bootstrap confidence intervals should be implemented instead of standard forecasts}
+\item{boot}{Whether bootstrap forecasts and bootstrap prediction intervals should be implemented instead of standard forecasts}
 
-\item{levels}{The levels of the boostrap confidence intervals, if boot is set to TRUE}
+\item{levels}{The levels of the bootstrap prediction intervals, if boot is set to TRUE}
 
-\item{L}{Number of boostrap estimations computed}
+\item{L}{Number of bootstrap estimations computed}
 }
 \value{
-Returns a list object containg the results of the forecasts based on the estimated Markov-Switching model. The list object contains
-the predicted future regime chance, the forecasts, the original time series and the number of time periods forecasted ahead. If boot is set to true, then also bootstrap confidence intervals are given.
+A list with zeta_hat, fcast, Y_T, and n.ahead. When boot
+is TRUE, fcast_boot contains the bootstrap mean and quantiles.
 }
 \description{
 MSARM.predict allows its user to make forecasts utilizing an earlier estimated Markov-Switching AR model, the underlying theory is described in Müller (2025, page 24)
 }
-\examples{
-MSARM.predict(res_MSARM.fit, n.ahead = 4) would give for a quarterly time series the forecast for the next year.
+\details{
+Bootstrap paths simulate regime transitions and resample
+centered, standardized residuals. Forecast lags propagate along
+each path. Bounds are pointwise prediction intervals.
 }

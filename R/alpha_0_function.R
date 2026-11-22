@@ -5,18 +5,13 @@
 #' @param N Number of underlying regimes
 #' @param K Lag-order of the AR model
 #'
-#' @return Returns a matirx of the dimensions (N x K+2) containing randomly generated values for (intercept, coefficients, error term variance)
+#' @return Returns an N by (K + 2) matrix containing randomly generated values for (intercept, coefficients, error term variance)
 #' @export
 #'
-#' @examples alpha_0_function(Y_T,N,K)
 #'
-alpha_0_function = function(Y_T,N,K){
-  T = length(Y_T)
-  alpha = matrix(0,nrow = N,ncol = K+2)
-  for(n in 1:N){
-    alpha[n,1] = runif(1,min(Y_T),max(Y_T)) #intercept is drawn from a uniform distribution ranging from the minimum to the maximum of the time series
-    alpha[n,2:(K+1)] = rnorm(K,0,0.5) #the coefficients are drawn from a normal distribution with mean 0 and standard deviation 0.5
-  }
-  alpha[,K+2] = runif(N,0,sd(Y_T)/2) #the error term variance is first set between 0 and the standard deviation of the total time series divided by 2
-  return(alpha)
+alpha_0_function <- function(Y_T, N, K) {
+  spread <- stats::sd(Y_T)
+  cbind(stats::runif(N, min(Y_T), max(Y_T)),
+        matrix(stats::rnorm(N * K, sd = 0.25 / sqrt(K)), N, K),
+        stats::runif(N, 0.25, 1) * spread^2)
 }

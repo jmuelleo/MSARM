@@ -2,23 +2,19 @@
 % Please edit documentation in R/zeta_1_0_function.R
 \name{zeta_1_0_function}
 \alias{zeta_1_0_function}
-\title{zeta_1_0_function}
+\title{Draw Random Regime Weights}
 \usage{
 zeta_1_0_function(Y_T, N, K)
 }
 \arguments{
-\item{Y_T}{Data}
+\item{Y_T, K}{Retained for compatibility.}
 
-\item{N}{Number of underlying regimes}
-
-\item{K}{Lag-order of the AR model}
+\item{N}{Number of regimes.}
 }
 \value{
-Creates a vector representing the random starting point for the optimal inference over the regimes
+A probability vector of length N.
 }
 \description{
-zeta_1_0_function creates zeta_1_0 as part of the random starting point for the EM algorithm
-}
-\examples{
-zeta_1_0_function(Y_T,N,K)
+Generates normalized uniform draws. The fit and filtering
+routines use deterministic uniform initial probabilities.
 }

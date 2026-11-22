@@ -18,7 +18,7 @@ MSARM.fit(
 )
 }
 \arguments{
-\item{Y_T}{Data (The full time series that is to be analyzed)}
+\item{Y_T}{Finite numeric vector or univariate time series.}
 
 \item{K}{Lag-order of the AR model}
 
@@ -26,27 +26,45 @@ MSARM.fit(
 
 \item{Switcher}{A vector of TRUE/FALSE indicating which parameters switch (intercept, coefficients, error term variance), the vector should have the length K+2}
 
-\item{m}{Number of time periods the conditional likelihood function conditions on (generally set to 1)}
+\item{m}{Transition counts start at observation K + m + 1. The default 1 includes every transition in the post-lag sample.}
 
-\item{threshold_value}{Threshold for assigning the estimated regimes (generally set to 0.5)}
+\item{threshold_value}{Horizontal probability reference line when all.plot is TRUE.}
 
 \item{max_value}{Number of iterations for the EM algorithm (a higher iteration number increases the estimation quality)}
 
 \item{R_value}{Number of random starting points for the EM algorithm (a higher number of random starting points increases estimation quality)}
 
-\item{Crit_value}{Performance metric for choosing between the different optima. It is advised to run the function ones with "LV" and once with "RCM", if both estimation approaches lead to vastly different results a third run with Entropy can help to decide.}
+\item{Crit_value}{Criterion used to select a start. "LV" maximizes log-likelihood. "RSS", "RCM", and "Entropy" minimize the named statistic.}
 
-\item{all.plot}{Whether plots from all optimisation attempts should be printed}
+\item{all.plot}{If TRUE, plot regime probabilities and fitted values for each start.}
 }
 \value{
-Returns a list object containing the estimation results regarding the Markov-Switching AR model. The output includes
-the estimate of the P matrix, the estimate of the alpha matrix, the smoothed inference regarding the regines, the value of the log-likelihood function
-the computed RSS value, the computed RCM value and the computed Entropy value. Furthermore the list contains the original time series, the in-sample fit and the residuals.
+A list with P (column-stochastic transitions from column to row),
+alpha (regime rows with intercept, AR coefficients, and variance),
+zeta_t_T (smoothed probabilities for the post-lag sample in columns),
+LV (conditional log-likelihood), RSS (residual sum of squares), RCM
+(regime classification measure on 0 to 100), Entropy (normalized Shannon
+entropy), Y_T (input), Yhat_insample (fitted values for the
+most probable smoothed regime), and residuals.
 }
 \description{
 MSARM.fit allows its user to estimate Markov-Switching AR models, as they are described in Hamilton (1994, page 690-698). Thereby an arbitrary set of parameters
 is allowed to switch. The estimation process strongly orients itself on the EM algorithm described in Hamilton (1990) and is described in more detail in Müller (2025, page 7-21).
 }
+\details{
+Regime probabilities begin from a uniform distribution.
+Each start runs max_value iterations. Innovation variances are bounded
+below by 1e-10 times the sample variance.
+}
 \examples{
-MSARM.fit(Y_T,K,N,Switcher) would be the standard implementation of MSARM.fit
+set.seed(12)
+y <- arima.sim(list(ar = 0.5), n = 80)
+fit <- MSARM.fit(y, 1, 2, c(TRUE, FALSE, TRUE),
+                 max_value = 10, R_value = 1)
+fit$P
+}
+\references{
+Baele, L. (2005). Volatility spillover effects in European
+equity markets. Journal of Financial and Quantitative Analysis, 40(2),
+373-401. doi:10.1017/S0022109000002350.
 }

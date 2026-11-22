@@ -4,7 +4,7 @@
 \alias{Example4_Beta_F_function}
 \title{Example4_Beta_F_function}
 \usage{
-Example4_Beta_F_function(Y_T, alpha, P, Switcher = Switcher, N, K, m)
+Example4_Beta_F_function(Y_T, alpha, P, Switcher, N, K, m)
 }
 \arguments{
 \item{Y_T}{Data}
@@ -19,14 +19,11 @@ Example4_Beta_F_function(Y_T, alpha, P, Switcher = Switcher, N, K, m)
 
 \item{K}{Lag-order of the AR model}
 
-\item{m}{Number of time periods the conditional log-likelihood conditions on}
+\item{m}{Retained for compatibility. This update uses the full post-lag sample.}
 }
 \value{
 Returns a vector representing beta_F based on the results from the last iteration
 }
 \description{
 Example4_Beta_F_function allows its user to estimate the fixed coefficients vector called beta_F, based on the results from the previous iteration and the formulas in Müller (2025, page 21)
-}
-\examples{
-Example4_Beta_F_function(Y_T,alpha,P,Switcher = Switcher,N,K,m)
 }

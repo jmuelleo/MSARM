@@ -17,14 +17,11 @@ Example3_alpha_next_function(alpha, P, Y_T, N, K, m)
 
 \item{K}{Lag-order of the AR model}
 
-\item{m}{Number of time periods the conditional likelihood conditions on}
+\item{m}{Retained for compatibility. This update uses the full post-lag sample.}
 }
 \value{
 returns a matrix of the dimensions (N x K+2)
 }
 \description{
 The next alpha for Example 3 setups (all parameters switch) is computed as part of the EM algorithm
-}
-\examples{
-Example3_alpha_next_function(alpha,P,Y_T,N,K,m)
 }

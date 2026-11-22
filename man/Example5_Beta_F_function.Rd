@@ -19,14 +19,11 @@ Example5_Beta_F_function(Y_T, alpha, P, Switcher, N, K, m)
 
 \item{K}{Lag-order of the AR model}
 
-\item{m}{Number of time periods the conditional likelihood conditions on}
+\item{m}{Retained for compatibility. This update uses the full post-lag sample.}
 }
 \value{
 Returns a vector representing the estimates for beta_F based on the results from the last iteration
 }
 \description{
 Example5_Beta_F_function allows its user to compute beta_F as part of the EM algorithm for Example 5 setups, for details see Müller (2025, page 23-24)
-}
-\examples{
-Example5_Beta_F_function(Y_T,alpha,P,Switcher,N,K,m)
 }

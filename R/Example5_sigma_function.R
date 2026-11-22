@@ -7,43 +7,21 @@
 #' @param Switcher Switching vector indicating whether a parameter switches or not
 #' @param N Number of underlying regimes
 #' @param K Lag-order of the AR model
-#' @param m Number of time periods the conditional likelihood conditions on
+#' @param m Retained for compatibility. This update uses the full post-lag sample.
 #'
 #' @return Returns a vector representing the estimates for the standard deviation of the error term, based on the results from the last iteration
 #' @export
 #'
-#' @examples Example5_sigma_function(Y_T,alpha,P,Switcher,N,K,m)
-Example5_sigma_function = function(Y_T,alpha,P,Switcher,N,K,m){
-
-  T = length(Y_T)
-  zeta_YT = zeta_YT_function(alpha = alpha,P = P ,Y_T = Y_T,N = N,K = K) #smoothed inference for the regimes
-  p = zeta_YT[,(K+K+1+m):T]
-
-  X = matrix(0,ncol = K+1,nrow = T-K-K-m)
-
-  Y = Y_T[(K+K+1+m):T]
-
-  X[,1] = rep(1,T-K-K-m)
-  for(k in 1:K){
-    X[,k+1] = Y_T[(K+K+1+m-k):(T-k)] #Creates the Lags of the time series
-  }
-
-  coef_Switcher = Switcher[-(K+2)]
-
-  X_F = as.matrix(X[,!coef_Switcher]) #Creates the data matrix for the fixed coefficients
-  X_S = as.matrix(X[, coef_Switcher]) #Creates the data matrix for the switching coefficients
-  F_count = sum(coef_Switcher == FALSE) #Number of fixed parameters
-  S_count = sum(coef_Switcher == TRUE) #Number of switching parameters
-
-  sigma = rep(0,N)
-  for(j in 1:N){
-
-    upper_j = sum(((Y - X%*%alpha[j,-(K+2)])^2)*p[j,]) #creates the numerator of the formula presented in Müller (2025, page 24)
-    lower_j = sum(p[j,]) #creates the denominator of the formula presented in Müller (2025, page 24)
-
-    sigma[j] = sqrt(upper_j/lower_j) #compute sigma_j
-
-  }
-
-  return(sigma)
+Example5_sigma_function <- function(Y_T, alpha, P, Switcher, N, K, m) {
+  design <- msarm_design(Y_T, K)
+  probabilities <- zeta_YT_function(alpha, P, Y_T, N, K)[, -seq_len(K),
+                                                         drop = FALSE]
+  residuals <- sweep(design$X %*% t(alpha[, seq_len(K + 1L), drop = FALSE]),
+                     1L, design$y, "-")
+  mass <- rowSums(probabilities)
+  sigma2 <- alpha[, K + 2L]
+  active <- mass > 0
+  sigma2[active] <- rowSums(probabilities * t(residuals^2))[active] /
+    mass[active]
+  sqrt(pmax(sigma2, stats::var(Y_T) * 1e-10))
 }

@@ -14,12 +14,8 @@ alpha_0_function(Y_T, N, K)
 \item{K}{Lag-order of the AR model}
 }
 \value{
-Returns a matirx of the dimensions (N x K+2) containing randomly generated values for (intercept, coefficients, error term variance)
+Returns an N by (K + 2) matrix containing randomly generated values for (intercept, coefficients, error term variance)
 }
 \description{
 A random starting value of alpha is generated so that the EM algorithm can start
-}
-\examples{
-alpha_0_function(Y_T,N,K)
-
 }

@@ -11,16 +11,13 @@ MSARM.plot(res_MSARM.predict, conf = FALSE, start = c(1, 1), freq = 1)
 
 \item{conf}{Set to TRUE if MSARM.predict was implemented with the option boot = TRUE, then bootstrap confidence intervals are plotted}
 
-\item{start}{Start of the time series (format as in in the window() command), therefore (year,quarter) for quarterly data for example}
+\item{start}{Start time. Defaults to the time series start when available.}
 
-\item{freq}{Frequency of the data, i.e. 4 for quarterly, 12 for monthly data.}
+\item{freq}{Series frequency. Defaults to the input frequency when available.}
 }
 \value{
-Returns forecast plots
+Invisibly returns NULL. Draws the forecast and optional prediction bands.
 }
 \description{
 MSARM.plot creates forecast plots for MSARM.fit results
-}
-\examples{
-MSARM.plot(res_MSARM.predict, start = c(1967,1), freq = 4) would give a standard forecast plot with the original data starting in 1967, first quarter
 }

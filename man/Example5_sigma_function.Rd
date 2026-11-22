@@ -19,14 +19,11 @@ Example5_sigma_function(Y_T, alpha, P, Switcher, N, K, m)
 
 \item{K}{Lag-order of the AR model}
 
-\item{m}{Number of time periods the conditional likelihood conditions on}
+\item{m}{Retained for compatibility. This update uses the full post-lag sample.}
 }
 \value{
 Returns a vector representing the estimates for the standard deviation of the error term, based on the results from the last iteration
 }
 \description{
 Example5_sigma_function allows its user to esimate the error term standard deviation for Example 5 setups, based on the results from previous iterations and the formula presented in Müller (2025, page 24)
-}
-\examples{
-Example5_sigma_function(Y_T,alpha,P,Switcher,N,K,m)
 }

@@ -2,23 +2,18 @@
 % Please edit documentation in R/P_0_function.R
 \name{P_0_function}
 \alias{P_0_function}
-\title{P_0_function}
+\title{Random Initial Transition Matrix}
 \usage{
 P_0_function(Y_T, N, K)
 }
 \arguments{
-\item{Y_T}{Data}
+\item{Y_T, K}{Retained for compatibility.}
 
-\item{N}{Number of underlying regimes}
-
-\item{K}{Lag-order of the AR model}
+\item{N}{Number of regimes.}
 }
 \value{
-Returns a matrix of the dimensions (N x N)
+A column-stochastic N by N transition matrix.
 }
 \description{
-P_0_function creates P_0 as part of a random starting point for the EM algorithm
-}
-\examples{
-P_0_function(Y_T,N,K)
+Random Initial Transition Matrix
 }

@@ -17,14 +17,11 @@ P_ij_next_function(alpha, P, Y_T, N, K, m)
 
 \item{K}{Lag-order of the AR model}
 
-\item{m}{Number of time periods the conditional likelihood function conditions on}
+\item{m}{Transition counts start at observation K + m + 1. The default 1 includes every transition in the post-lag sample.}
 }
 \value{
 Returns a matrix of the dimensions (N x N)
 }
 \description{
 P_ij_next_function allows its user to estimate the P matrix of the next iteration as part of the EM algorithm, as described in Hamilton (1994, page 695)
-}
-\examples{
-P_ij_next_function(alpha,P,Y_T,N,K,m)
 }

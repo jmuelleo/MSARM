@@ -1,5 +1,26 @@
+msarm_probability_ratio <- function(smoothed, predicted) {
+  ratio <- smoothed
+  positive <- predicted > 0
+  ratio[positive] <- smoothed[positive] / predicted[positive]
+  ratio[!positive] <- 0
+  ratio
+}
 
-#' @title zeta_YT_function
+msarm_smooth <- function(filter, P, K) {
+  smoothed <- filter$tt
+  n <- ncol(smoothed)
+  if (n > K + 1L) {
+    for (time in seq.int(n - 1L, K + 1L)) {
+      ratio <- msarm_probability_ratio(smoothed[, time + 1L],
+                                       filter$t1t[, time])
+      weights <- filter$tt[, time] * drop(crossprod(P, ratio))
+      smoothed[, time] <- weights / sum(weights)
+    }
+  }
+  smoothed
+}
+
+#' @title Smoothed Regime Probabilities
 #' @description zeta_YT_function allows its user to get smoothed inference over the regimes as described in Hamilton (1994, page 694)
 #' @param alpha alpha matrix from the last iteration
 #' @param P P matrix from the last iteration
@@ -7,21 +28,9 @@
 #' @param N Number of underlying regimes
 #' @param K Lag-order of the AR model
 #'
-#' @return Returns the smoothed inference over the regimes
+#' @return An N by length(Y_T) matrix of smoothed probabilities. Presample columns are NA.
 #' @export
 #'
-#' @examples zeta_YT_function(alpha,P,Y_T,N,K)
-zeta_YT_function = function(alpha,P,Y_T,N,K){
-  T = length(Y_T)
-  zeta_list = zeta_Yt_function(alpha,P,Y_T,N,K) #optimal inference over the regimes
-  zeta_t_t = zeta_list[[1]]
-  zeta_t1_t = zeta_list[[2]]
-
-  zeta_t_T = matrix(5,nrow = N,ncol = T)
-  zeta_t_T[,T] = zeta_t_t[,T]
-
-  for(t in (T-1):(K+1)){
-    zeta_t_T[,t] = zeta_t_t[,t] * (t(P)%*%(zeta_t_T[,t+1]/zeta_t1_t[,t])) #Estimation based on the formulas shown in Hamilton (1994, page 694)
-  }
-  return(zeta_t_T)
+zeta_YT_function <- function(alpha, P, Y_T, N, K) {
+  msarm_smooth(msarm_filter(alpha, P, Y_T, N, K), P, K)
 }

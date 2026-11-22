@@ -24,7 +24,7 @@ Example3_EM_Algorithm_function_lastbeta(
 
 \item{N}{Number of underlying regimes}
 
-\item{m}{Number of time periods the conditional likelihood conditions on}
+\item{m}{Transition counts start at observation K + m + 1. The default 1 includes every transition in the post-lag sample.}
 
 \item{threshold}{#threshold for assigning the predicted regimes}
 
@@ -43,7 +43,4 @@ returns a list object containg the results from the EM algorithm estimation of t
 }
 \description{
 Example3_EM_Algorithm_function_lastbeta allows its user to apply the EM algorithm for estimating Markov-Switching models of the form of Example 3 (All Switching), as described in Müller (2025, page 18-19)
-}
-\examples{
-Example3_EM_Algorithm_function_lastbeta(Y_T,K,N,m,threshold = 0.5,max = 500,R = 15, Crit = "LV", all.plot = FALSE, Switcher)
 }

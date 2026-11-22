@@ -16,11 +16,8 @@ eta_function(alpha, Y_T, N, K)
 \item{K}{Lag-order of the AR model}
 }
 \value{
-returns a matrix of the dimensions (T x N) containing the values of the conditional density function
+An N by length(Y_T) matrix of conditional densities. Presample columns are NA.
 }
 \description{
 The eta-vector, defined as in Hamilton (1994, page 691) is computed
-}
-\examples{
-eta_function(alpha,Y_T,N,K)
 }

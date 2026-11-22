@@ -19,14 +19,11 @@ Example5_alpha_next_function_lastbeta(Y_T, alpha, P, Switcher, N, K, m)
 
 \item{K}{Lag-order of the AR model}
 
-\item{m}{Number of time periods the conditional likelihood conditions on}
+\item{m}{Retained for compatibility. This update uses the full post-lag sample.}
 }
 \value{
 Returns a matrix of the dimensions (N x K+2)
 }
 \description{
 Example5_alpha_next_function_lastbeta allows its user to estimate the alpha matrix of the next iteration as part of the EM algorithm for setups of the form of Example 5. A more detailed explanation can be found in Müller (2025, page 21-24)
-}
-\examples{
-Example5_alpha_next_function_lastbeta(Y_T,alpha,P,Switcher,N,K,m)
 }

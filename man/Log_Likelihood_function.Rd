@@ -23,6 +23,3 @@ Returns the value of the log-likelihood function at a specific theta
 \description{
 Log_Likelihood_function allows its user to compute the value of the log-likelihood function based on Hamilton (1994, page 692)
 }
-\examples{
-Log_Likelihood_function(alpha,P,Y_T,N,K)
-}
