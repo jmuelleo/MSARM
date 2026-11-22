@@ -24,6 +24,7 @@ simulate <- function(s, seed) {
   set.seed(seed)
   P <- matrix(.08 / (s$k - 1L), s$k, s$k)
   diag(P) <- .92
+  if (!is.null(s$P)) P <- s$P
   order <- ncol(s$beta) - 2L
   y <- numeric(s$n + 100L)
   state <- rep(1L, length(y))
@@ -54,7 +55,7 @@ score <- function(y, order, P, beta) {
   }
   value
 }
-fit_one <- function(package, data, s, seed) {
+fit_one <- function(package, data, s, seed, return_path = FALSE) {
   set.seed(seed)
   y <- data$y
   start <- proc.time()[["elapsed"]]
@@ -83,31 +84,35 @@ fit_one <- function(package, data, s, seed) {
     permutations <- if (s$k == 2L) rbind(1:2, 2:1) else
       rbind(c(1,2,3), c(1,3,2), c(2,1,3), c(2,3,1), c(3,1,2), c(3,2,1))
     error_rate <- min(apply(permutations, 1L, function(p) mean(p[guess] != truth)))
-    list(loglik = max(values), misclassified = error_rate, error = "")
+    list(loglik = max(values), misclassified = error_rate, error = "",
+         path = if (return_path) smooth[, -seq_len(data$order), drop = FALSE])
   }, error = function(e) list(loglik = NA_real_, misclassified = NA_real_,
                               error = conditionMessage(e)))
+  if (!return_path) result$path <- NULL
   c(list(package = package, seconds = proc.time()[["elapsed"]] - start), result)
 }
 selected <- if (length(args) >= 2L) args[2L] else names(scenarios)
-if (!all(selected %in% names(scenarios))) stop("Unknown scenario")
 output <- if (length(args) >= 3L) args[3L] else "benchmarks/results.csv"
 offset <- if (length(args) >= 4L) as.integer(args[4L]) else 0L
-rows <- list()
-for (name in selected) {
-  s <- scenarios[[name]]
-  for (i in offset + seq_len(replications)) {
-    data <- simulate(s, 1000L + i)
-    truth <- score(data$y, data$order, data$P, s$beta)
-    for (package in c("MSARM", "MSwM")) {
-      fit <- fit_one(package, data, s, 2000L + i)
-      rows[[length(rows) + 1L]] <- as.data.frame(
-        c(list(scenario = name, replication = i, truth = truth), fit))
+if (sys.nframe() == 0L) {
+  if (!all(selected %in% names(scenarios))) stop("Unknown scenario")
+  rows <- list()
+  for (name in selected) {
+    s <- scenarios[[name]]
+    for (i in offset + seq_len(replications)) {
+      data <- simulate(s, 1000L + i)
+      truth <- score(data$y, data$order, data$P, s$beta)
+      for (package in c("MSARM", "MSwM")) {
+        fit <- fit_one(package, data, s, 2000L + i)
+        rows[[length(rows) + 1L]] <- as.data.frame(
+          c(list(scenario = name, replication = i, truth = truth), fit))
+      }
+      message("Completed ", name, " replication ", i)
     }
-    message("Completed ", name, " replication ", i)
+    message("Completed ", name)
   }
-  message("Completed ", name)
+  results <- do.call(rbind, rows)
+  write.csv(results, output, row.names = FALSE)
+  print(aggregate(cbind(seconds, misclassified) ~ package, results, median))
+  print(with(results, table(package, failed = !is.finite(loglik))))
 }
-results <- do.call(rbind, rows)
-write.csv(results, output, row.names = FALSE)
-print(aggregate(cbind(seconds, misclassified) ~ package, results, median))
-print(with(results, table(package, failed = !is.finite(loglik))))

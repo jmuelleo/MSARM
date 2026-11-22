@@ -44,3 +44,5 @@ against the original MSARM commit used an AR(2) series of 250 observations,
 30 EM steps, and two starts. Over three runs median elapsed time was
 1.84 seconds for the original and 0.14 seconds for the revision on Windows
 with R 4.5.2.
+
+[Extended regime recovery stress test](REGIME-STRESS.md)
